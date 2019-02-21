@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    input{width:100px;
+        line-height: 100px;}
+    
+</style>
+
+<body>
+<input type="button" value="0"/>
+<input type="button" value="0"/>
+<input type="button" value="0"/>
+
+
+
+
+
+<script>
+var oBtn=document.getElementsByTagName("input"),
+    // 默认
+    clickIndex= 0,
+     arr=['a','b','c','d'];
+
+
+  /*  for(var k=0;k<oLi.length;k++){
+        oLi[k].index=k;
+        oLi[k].onclick = function () {
+            oLi[clickIndex].style.backgroundImage='';
+            this.style.backgroundImage='url(images/'+(this.index+1)+'.png)';
+            clickIndex=this.index;
+
+        };
+    }*/
+
+
+for(var k=0;k<oBtn.length;k++){
+    oBtn[k].num=0;
+    oBtn[k].onclick = function () {
+        console.log(this.index);
+        this.value=arr[this.num];
+        this.num++;
+        if(this.num==arr.length){
+            this.num=0;
+        }
+
+    };
+}
+
+
+</script>
+</body>
+</html>

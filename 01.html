@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<ul id="ulbox1">
+    <li>ul1</li>
+    <li>ul1</li>
+    <li>ul1</li>
+    <li>ul1</li>
+</ul>
+
+
+<div>
+    <select name="" id="select1">
+        <option value="1">北京</option>
+        <option value="2">上海</option>
+        <option value="3">广州</option>
+    </select>
+</div>
+
+
+<script>
+    var ul1=document.getElementById("ulbox1");
+    console.log(typeof ul1);
+    console.log(ul1);
+    ul1.className='ul-box lalala';
+
+    // 元素.事件=函数名
+    ul1.onclick=abc;
+
+    function abc() {
+        console.log(this);
+    }
+
+    var selectBox=document.getElementById("select1");
+    // 默认第一行的value 如果第2个设置了selected 那么value 会变成2
+    console.log(selectBox.value);
+    selectBox.onchange= function () {
+      console.log(this.value);
+    };
+
+
+
+</script>
+
+</body>
+</html>

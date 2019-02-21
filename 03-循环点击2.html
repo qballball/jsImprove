@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+       li{border:1px solid #333;
+           background-color:#00ffff;}
+    </style>
+</head>
+
+
+<body>
+
+<ul id="ul">
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+
+<script>
+    window.onload= function () {
+        var oUl=document.getElementById('ul');
+        var oLi=oUl.getElementsByTagName('li');
+
+        var arr=['今天','后天','明天'];
+
+        for(var i=0;i<oLi.length;i++){
+            // 给每个元素遍历一个索引值 标识元素位置
+            oLi[i].cur=i;
+            oLi[i].onclick=function (e) {
+                var index=this.cur;
+                this.innerHTML=arr[index];
+
+
+            };
+        }
+
+
+    };
+
+</script>
+
+
+
+</body>
+</html>

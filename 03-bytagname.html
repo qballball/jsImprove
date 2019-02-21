@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="css/global.css" rel="stylesheet" type="text/css">
+
+    <style>
+        div{width:20px; height: 20px; position: absolute; top:0px; left: 0px;
+            background-color:#000088;color:#fff;
+            text-align: center;
+            line-height: 20px; }
+    </style>
+</head>
+
+
+
+<body>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+
+<ol id="ol">
+    <li>11</li>
+    <li>22</li>
+    <li>33</li>
+</ol>
+
+
+
+<script>
+    window.onload= function () {
+
+
+        var oUl=document.getElementsByTagName('ul')[0];
+        // 找到父级下面的li 虽然不是数组但是具有数组的属性
+        var oLi=oUl.getElementsByTagName('li');
+        console.log(oUl);
+        console.log(oLi.length);
+    };
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<ul>
+    <li><input class="cut" type="button" value="-"/><span class="num">0</span><input class="add" type="button" value="+"/><strong data-n="6" class="singleMoney">单价：6元</strong>&nbsp;&nbsp;&nbsp;<b data-n="0" class="singleCount">小计：0元</b></li>
+    <li><input class="cut" type="button" value="-"/><span class="num">0</span><input class="add" type="button" value="+"/><strong data-n="16"  class="singleMoney">单价：16元</strong>&nbsp;&nbsp;&nbsp;<b data-n="0"  class="singleCount">小计：0元</b></li>
+    <li><input class="cut" type="button" value="-"/><span class="num">0</span><input class="add" type="button" value="+"/><strong data-n="10"  class="singleMoney">单价：10元</strong>&nbsp;&nbsp;&nbsp;<b data-n="0"  class="singleCount">小计：0元</b></li>
+</ul>
+
+
+<script src="js/jquery.js"></script>
+<script>
+    $(".cut").on("click", function () {
+       countMoney($(this),'cut');
+    });
+    $(".add").on("click", function () {
+        countMoney($(this),'add');
+
+    });
+
+
+    function countMoney(self,type) {
+        var     numObj=self.parents('li').find('.num'),
+                singleMoneyObj=self.parents('li').find('.singleMoney'),
+                singleCountObj=self.parents('li').find('.singleCount'),
+                sCount;
+        switch (type){
+            case 'add':
+                numObj.html(parseInt(numObj.html())+1);
+                break;
+            case 'cut':
+                if(numObj.html()==='0'){
+                    console.log('不能小于0!');
+                    return;
+                }
+                numObj.html(parseInt(numObj.html())-1);
+                break;
+        }
+        sCount=singleMoneyObj.data('n')*numObj.html();
+        singleCountObj.html('小计：'+sCount);
+    };
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

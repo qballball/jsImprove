@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="css/global.css" rel="stylesheet" type="text/css">
+
+    <style>
+        div{width:20px; height: 20px; position: absolute; top:0px; left: 0px;
+            background-color:#000088;color:#fff;
+            text-align: center;
+            line-height: 20px; }
+    </style>
+</head>
+
+<script>
+    window.onload= function () {
+        var divs=document.getElementsByTagName('div');
+        var colNum=parseInt(window.innerWidth/25);
+        var rowCen=window.innerWidth%25/2;
+        var htmls='',k=0,b=0;
+        for(var i=0;i<1000;i++){
+
+           if(i!=0 && i%colNum==0){
+                k++;
+                b=0;
+            }
+            htmls+='<div style="left:'+(b*25+rowCen)+'px;top:'+k*25+'px'+'">'+i+'</div>';
+            b++;
+
+
+
+        }
+
+        document.body.innerHTML=htmls;
+    };
+
+</script>
+
+<body>
+
+
+
+</body>
+</html>

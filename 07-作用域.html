@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+    *（1) js解析器：找一些东西：var变量， function，入参
+    * */
+     // 所有的变量在正式运行代码前，都提前赋值，未定义;
+     console.log(a); // undefined
+    var a=1;   // 如果没有这行 就会报错
+    // 所有的函数，在正式运行代码前，都是整个函数块
+    console.log(fn1);  // 整体函数块：fn1() {console.log(2);}
+
+    function fn1() {
+        console.log(2);
+    }
+    //（2） 逐行解读代码
+    // 表达式 =+-*/%++--!参数...
+    // 3) 假如var 和函数重名，优先取函数，如果函数和函数重名，取最后一个。
+    console.log(b); // b() {console.log(5); }
+    var b=2;
+    console.log(b);  //2  表达式可以改变变量的值
+    function b() {
+        console.log(3);
+    }
+    console.log(b); //2  表达式可以改变变量的值，但是前面的函数代码只是声明，函数不能不改变变量的值
+    var b=4;
+    console.log(b); // 4
+    function b() {
+        console.log(5);
+    }
+    console.log(b); // 4
+
+
+    console.log(typeof b);
+    // b的值已经被改变为数值 所以 3（） 不存在的 会报错
+//    b();
+
+//    console.log(c);
+    //前后都没有var的会报错
+    // c=10;
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+<!--一片一片执行的 所以d不存在-->
+<script>
+    /* 作用域 自上而下
+    script便签内是  全局变量 全局函数
+     域：空间，范围，区域
+     作用：读，写
+     */
+    // var d=1;
+//  d=2;
+
+    console.log(d);
+
+
+</script>
+
+<script>
+    var d=1;
+
+</script>
+
+</body>
+</html>

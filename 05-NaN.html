@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<input type="text" name="" id="ipt"/>
+<button id="btn">是否是数字</button>
+<p id="ptxt"></p>
+
+
+<script>
+    var a1=Number('abc');
+    console.log(a1);  //NaN not a number
+    // 当进行了非法的运算操作 会出现NaN
+    console.log('200px'-100);
+
+
+    // NaN 始终是假的
+    if(a1){
+        console.log('NaN是真');
+    }else{
+        console.log('NaN是假');
+    }
+
+    console.log(a1===a1);  // NaN 与自己不相等
+
+
+    // isNaN 内容是：不是一个数字 即为真,它不喜欢数字,讨厌数字
+    console.log(isNaN(200));
+    // 碰到非数值的 1.首先交给Number转换，转换为数字就为false ,转不为数字为true
+    console.log(isNaN('200'));  //false
+
+    console.log(isNaN('喜欢')); // true
+    console.log(isNaN(function(){alert(1);}));  // true
+    console.log(isNaN(''));  // false
+
+
+
+    var ipt=document.getElementById("ipt");
+    var btn=document.getElementById("btn");
+    var pTxt=document.getElementById("ptxt");
+
+
+    btn.onclick=function () {
+        var str=ipt.value;
+         console.log(typeof str);
+        if(isNaN(str)){
+         console.log(str+'不是数字');
+        }else{
+            console.log(str+'是数字!');
+
+        }
+    };
+
+</script>
+</body>
+</html>

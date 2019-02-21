@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        div{width:20px; height: 20px; position: absolute; top:0px; left: 0px;
+            background-color:#000088;color:#fff;
+            text-align: center;
+            line-height: 20px; }
+    </style>
+</head>
+<script>
+    window.onload= function () {
+
+        // getElementsByTagName: 是动态的，可以获取已知的所有的；前面可以是ducument 或者是别的元素，
+        // getElementById : 是静态的，当前没有就获取不到了；前面必须是document
+        var btnId=document.getElementById('btn1');
+        var btnTag=document.getElementsByTagName('input');
+
+        console.log(btnId);
+        console.log(btnTag);
+
+        document.body.innerHTML='<input id="btn1" type="button" value="按钮1"/><input type="button" value="按钮3"/><input type="button" value="按钮3"/>';
+
+
+    };
+
+</script>
+
+
+<body>
+
+<input type="button" value="按钮"/>
+
+
+
+
+</body>
+</html>

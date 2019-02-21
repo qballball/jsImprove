@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // 如何获取局部内的值？将它拿到其他地方？ 重新建立函数入参；将局部变量赋值给全局变量
+    function fn1() {
+        // 根据预解析  是局部变量
+        var a='鸡腿~';
+    }
+    fn1();
+    // 所以即使调用也不会变为全局变量
+//    console.log(a);
+
+
+</script>
+</body>
+</html>

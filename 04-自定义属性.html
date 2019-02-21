@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    li{width:64px; height: 64px; background-position: 0 0;background-repeat: no-repeat; background-image: url(images/4.png;)}
+</style>
+
+<body>
+
+<ul id="oUl">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+
+<script>
+var oUl=document.getElementById("oUl");
+var oLi=oUl.getElementsByTagName("li"),
+    // 默认
+    clickIndex=0;
+
+
+  /*  for(var k=0;k<oLi.length;k++){
+        oLi[k].index=k;
+        oLi[k].onclick = function () {
+            oLi[clickIndex].style.backgroundImage='';
+            this.style.backgroundImage='url(images/'+(this.index+1)+'.png)';
+            clickIndex=this.index;
+
+        };
+    }*/
+
+
+for(var k=0;k<oLi.length;k++){
+    oLi[k].onOff=true;
+    oLi[k].onclick = function () {
+        if(this.onOff){
+            this.style.backgroundImage='url(images/1.png)';
+            this.onOff=false;
+        }else{
+            this.style.backgroundImage='';
+            this.onOff=true;
+        }
+
+    };
+}
+
+
+</script>
+</body>
+</html>

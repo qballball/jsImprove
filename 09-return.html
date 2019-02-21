@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="box1"></div>
+
+
+<script>
+    // return 返回值：数字，字符串，布尔，函数，对象[],{},null, undefined
+    function fn1() {
+        return 100;
+    }
+    console.log(fn1());
+    function fn2() {
+        return 'miao';
+    }
+    console.log(fn2().length);
+
+    function fn3(m) {
+        return function (n) {
+            console.log(m+n);
+        }
+    }
+
+    fn3(14)(10);
+
+    //对象
+
+    function $(id) {
+        var str='';
+        if(id.indexOf("#")>-1){
+            str=document.getElementById(id.slice(1));
+        }
+        return str;
+    }
+    $('#box1').innerHTML='hahahah哈哈哈';
+
+    // 数组
+
+    function fn4(n) {
+        var arr=[];
+        for(var i=1;i<=n;i++){
+            arr.push(i);
+        }
+        return arr;
+    }
+
+    console.log(fn4(5));
+    console.log(fn4(8));
+
+    // 未定义 所有函数默认返回值是未定义
+    // 函数没有return 就是undefined
+    function fn5() {
+
+    };
+    console.log(fn5());
+
+
+    function fn6() {
+        return '123';
+        console.log('return后面的永远不会执行');
+    }
+    fn6();
+
+
+
+</script>
+</body>
+</html>

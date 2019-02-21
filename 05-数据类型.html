@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+
+<h2>显式类型转换（parseInt parseFloat Number）</h2>
+<h2>隐式类型转换(- * / %  ++ -- ! == ><)</h2>
+<script>
+    var a=null;
+    console.log(typeof a);
+    var b;
+    console.log(b);
+    console.log(typeof undefined);
+
+
+    var c1='100';
+    console.log(c1+'100');
+    console.log(Number(c1)+100);
+
+    var c2='0100';
+    console.log(Number(c2)+10);
+
+
+    // Number 对数据类型的转换
+    // 空格串和空串均转为0
+    var d1='';
+    console.log(Number(d1));  // false
+
+    //true 1 ;false 0
+    var d2=true;
+    console.log(Number(d2));
+
+    var d3=function(){alert(1);};
+    console.log(Number(d3));  // NaN
+
+    var d4=null;
+    console.log(Number(d4));  //0
+
+    var d5=undefined;
+    console.log(Number(d5)); // NaN
+
+
+    var d6='100px';
+    console.log(Number(d6)); //NaN
+    // parseInt：认识+-空格符号 直到转不成数字 就不再出现了
+    console.log(parseInt(d6)); //100
+
+    var d7='px100px';
+    console.log(parseInt(d7)); //NaN
+
+
+    var d8=200.1;
+    // 判断是整数还是小数
+    if(parseInt(d8)==parseFloat(d8)){
+        console.log(d8+'是整数');
+    }else{
+        console.log(d8+'是小数');
+    }
+
+
+    // 隐式
+    var e1='10';
+    e1++;
+    console.log(e1);  //11
+    // ><
+
+    // 如果两个字符串比较 比较的是字符编码 按位比较
+    console.log('10'>'9');
+    // 但是假设一个数字 一个文字数值 就会转其中一个非数值的改为数值类型的再比较
+    console.log(10>'9');
+
+
+    // ! 取反操作  把右边的数据类型转为布尔值：相当于(if !后面的)
+    console.log(!2);
+
+    // == 两边类型
+    console.log(2=='2');
+
+    // === 要求两边类型必须相等
+    console.log(2==='2');
+
+    console.log('22$'-9);  // NaN
+
+
+</script>
+</body>
+</html>

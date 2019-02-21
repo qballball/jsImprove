@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    fn1(1,2,3,[0,1,2,3,4]);  // 1,2,3是实参
+
+    // a,b,c是形参  形参形式主义，也可以没有
+//  function fn1(a,b,c) {
+    function fn1(){
+        // arguments 实参的集合
+        console.log(arguments);
+        console.log(arguments[0]);
+        console.log(arguments.length);
+
+    };
+
+
+ // 当函数的参数个数无法确定的时候，用arguments
+ console.log(sum(1,2,3,4));
+
+    function sum() {
+        var counts=0;
+        for(var i=0;i<arguments.length;i++){
+            counts+=arguments[i]
+        };
+        return counts;
+    }
+
+  // 简易计算器
+
+
+    function calc() {
+       switch(arguments[arguments.length-1]){
+           case '+':
+               var counts=0;
+               for(var i=0;i<arguments.length-1;i++){
+                   counts+=arguments[i]
+               };
+               break;
+           case "-":
+                var counts=arguments[0];
+                for(var i=1;i<arguments.length-1;i++){
+                    counts-=arguments[i];
+                }
+               break;
+
+       }
+        return counts;
+
+    }
+
+
+    console.log(calc(10,2,3,'-'));
+    console.log(calc(10,2,3,'+'));
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
