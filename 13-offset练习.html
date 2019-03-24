@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;}
+        #div1{          background-color: red;
+            position: relative;
+            width: 100px;
+            height: 100px; margin: 100px;
+        }
+        #div2{width: 60px; height: 60px;;
+            position: relative;
+
+            background-color: yellow;}
+
+        #div3{  width: 30px; height: 30px; background-color: blue;
+            /*也可用rel */
+            position: absolute;
+            top: 10px; left: 25px; border: 20px solid #00ffff;
+             /*尽量不使用margin 根据需求决定*/
+            /*margin-left: 10px;*/
+            transition:1s;
+        }
+
+    </style>
+</head>
+<body>
+
+<div>
+    <div id="div1">
+        <div id="div2">
+
+            <div id="div3"></div>
+
+        </div>
+
+
+    </div>
+</div>
+
+<input id="btn" type="button" value="点击走"/>
+
+
+
+<script>
+var div3=document.getElementById('div3');
+
+    
+    
+// 原始写法
+/*btn.onclick= function () {
+    console.log(div3.parentNode.offsetLeft);
+    console.log(div3.parentNode.parentNode.offsetLeft);
+    // elem 从自身的父级开始
+    var elem=div3.parentNode,left= 0,k=0;
+    while(elem){
+        // 如果外层有边框 需要加上cssborder边框值
+        left-=elem.offsetLeft+parseInt(getStyle(elem,'borderWidth'));
+        elem=elem.offsetParent;
+//        console.log(elem && elem.tagName||'');
+        k++;
+    }
+
+    div3.style.left=left+'px';
+
+};*/
+
+
+/*getBoundingClientRect:left right top bottom width height*/
+// 有bug?????
+btn.onclick= function () {
+
+    var pos=div3.getBoundingClientRect(),
+            left=pos.left;
+    div3.style.left=-left+'px';
+
+
+}
+
+//element:需要获取样式的目标元素;name:样式属性
+function getStyle(element, name) {
+    var computedStyle;
+    try {
+        computedStyle = document.defaultView.getComputedStyle(element, null);
+    } catch (e) {
+        computedStyle = element.currentStyle;
+    }
+    if (name != "float") {
+        return computedStyle[name];
+    } else {
+        return computedStyle["cssFloat"] || computedStyle["styleFloat"];
+    }
+}
+
+
+
+
+</script>
+
+
+</body>
+</html>

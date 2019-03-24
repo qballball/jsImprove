@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+       .box{position: relative;}
+        .box p{
+            background-color: #ff0;
+            width: 40px;height: 40px;position: absolute; top: 0px;}
+    </style>
+</head>
+<body>
+<div class="box">
+
+</div>
+<script src="js/jquery.js"></script>
+
+<script>
+    var str='';
+    for(var i=0;i<12;i++){
+        str+='<p style="left:'+(i*50)+'px;"></p>';
+    }
+    $(".box").html(str);
+
+   var k=0;
+   var timer=window.setInterval(function () {
+       $("p").eq(k).animate({top:"500px"},2000,'linear', function () {
+           $(this).css({'background':"#f00"});
+       });
+       k++;
+       if(k==$("p").length){
+           clearInterval(timer);
+       }
+   },100);
+
+
+    /*
+    * 当点击 播放 按钮执行一个定时器时，
+    * 再次点击了播放按钮，必需先清除定时器对象，否则会累加造成定时效果增快。
+    *
+    * */
+
+
+
+
+ </script>
+
+
+</body>
+</html>

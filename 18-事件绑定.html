@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<input type="file" name="" id="file1"/>
+
+
+
+<script>
+
+    document.querySelector("#file1").onchange= function (e) {
+        e.currentTarget.files.name='111.jpg';
+
+            };
+
+
+    function  fn1() {
+        console.log(this);
+
+    }
+    function  fn2() {
+        console.log(2);
+    }
+
+
+//    document.onclick=fn1;
+//    document.onclick=fn2; // fn2方法会覆盖fn1
+
+    // 给一个对象的同一个事件绑定多个不同函数，都可以执行
+
+    // ie下 obj.attachEvent(事件名称，事件函数）;
+        // this 指向window
+    // 标准 obj.addEventListener(事件名称，事件函数,是否捕获 默认false）;
+       // this 指向obj
+    // false冒泡 true 捕获
+    //call(指向对象，入参1，入参2...)
+//    document.attachEvent('onclick',fn1.call(document));
+   /* document.attachEvent('onclick',function () {
+        fn1.call(document);
+    });*/
+//    document.attachEvent('onclick',fn2);
+
+//    document.addEventListener('click',fn1)
+//    document.addEventListener('click',fn2)
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

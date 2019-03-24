@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{width: 100px; height: 100px;
+            background-color: #f00;
+
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+
+
+<script>
+  var div1=document.getElementById("div1");
+
+  // ie|chrome 滚轮事件 onmousewheel
+  div1.onmousewheel= function (e) {
+      // ie|chrome e.detail 判断方向：上 120 下 -120
+        console.log(e.wheelDelta);
+
+
+  } ;
+  // 火狐 DOMMouseScroll 必须用addEventListener 绑定
+ div1.addEventListener('DOMMouseScroll', function (e) {
+     // ff e.detail 判断方向：上 -3 下 3
+     console.log(e.detail);
+     // 阻止右侧滚动条默认事件
+     if(e.preventDefault){
+         e.preventDefault();
+     }
+     return false;
+
+ });
+
+ // 阻止右击菜单
+ document.addEventListener('contextmenu', function (e) {
+     // chrome:用此阻止默认事件
+     if(e.preventDefault) {
+         e.preventDefault();
+     }
+     // ie:return false
+ })
+
+
+    
+</script>
+</body>
+</html>

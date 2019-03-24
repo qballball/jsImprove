@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="div1">
+
+
+</div>
+
+
+<div id="box">
+    <div id="div3"></div>
+    <div id="div4"><p>hahahhaahha</p></div>
+</div>
+
+
+<div id="box2">
+    <div id="div5"><span>hhdhfhdsf</span></div>
+    <div id="div6"><p>hahahhaahha</p></div>
+</div>
+
+<input id="btn" type="button" value="点击往div添加section元素"/>
+<input id="delbtn" type="button" value="删除元素"/>
+<input id="repbtn" type="button" value="替换元素"/>
+<input id="clonebtn" type="button" value="克隆元素"/>
+
+<script>
+    var div1=document.getElementById('div1'),
+        btn=document.getElementById("btn"),
+        clonebtn=document.getElementById("clonebtn"),
+        box=document.getElementById("box"),
+        div5=document.getElementById("div5"),
+        replacebtn=document.getElementById("repbtn"),
+        delbtn=document.getElementById("delbtn");
+
+    var html='',
+        num=0;
+
+    // 初始方法
+   /* btn.onclick= function () {
+       html+='<p>'+num+'</p>';
+        num++;
+
+    div1.innerHTML=html;
+
+    };*/
+
+   /* //向父级尾部添加子元素
+    btn.onclick= function () {
+        // 创建元素
+//        var ps=document.createElement('p');
+        // 也可以添加自定义标签
+        var ps=document.createElement('ps');
+        ps.innerHTML=num;
+        num++;
+        // 向父级尾部添加子元素 父级.appendChild(元素)
+        div1.appendChild(ps);
+    };*/
+
+
+    //向父级首添加子元素
+    btn.onclick= function () {
+        var ps=document.createElement('p');
+        ps.innerHTML=num;
+        num++;
+        // insertBefore（新添加的元素，已有的元素节点）  向父级的某位元素前插入元素,
+        // 如果指定的已有元素节点不存在，那么新元素默认在后面添加
+        div1.insertBefore(ps,div1.children[0]);
+    };
+
+    // 删除元素 removeChild() 如果指定的节点没有会报错（解决：需要判断没有元素的时候不做删除）
+    delbtn.onclick= function () {
+        // 如果有最后一个 就删除，没有不操作
+        if(!div1.lastElementChild){
+            return;
+        }
+        div1.removeChild(div1.children[0]);
+
+    };
+    // 替换元素  父级.replaceChild(a,b); 把b替换为a  是剪切操作
+    replacebtn.onclick= function () {
+        box.replaceChild(div4,div3);
+    };
+
+
+    // 克隆元素  元素.cloneNode(a); a为true为深克隆，false不填是只克隆标签，不克隆里面的内容
+    // 注意：不会克隆事件
+    clonebtn.onclick= function () {
+        var cloneE=div5.cloneNode(true);
+        cloneE.innerHTML+=num;
+        box2.insertBefore(cloneE,box2.children[1]);
+        num++;
+
+    };
+
+    div5.onclick= function () {
+      console.log(1);
+    };
+
+
+</script>
+
+
+</body>
+</html>

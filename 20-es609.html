@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<h1>symbol</h1>
+<script>
+    // a b用来标识的
+var s=Symbol('a');
+    console.log(typeof s);
+    console.log(s);
+    var s2=Symbol('b');
+    console.log(s2);
+    // 不相等 相当于指针
+    console.log(s===s2);
+    // 不能new
+//    var s3=new Symbol();
+//    console.log(s3);
+
+    // a=3 会覆盖前面的a=1
+    var obj={a:1};
+    obj.b=2;
+    obj.a=3;
+    console.log(obj);
+
+    // 如何不覆盖呢？  symbol主要是为了避免键名重复
+    var a=Symbol('a');
+    obj[a]='sa';
+    console.log(obj);
+    // 不能这样写 每次写Symbol 等于新建一个指针 是和前面的a是不一样的
+    console.log(obj[Symbol('a')]);
+    var b=Symbol('b');
+    obj[b]='sb';
+    console.log(obj);
+
+
+    // symbol的没有被遍历到？
+    for(attr in obj){
+        console.log(obj[attr]);
+    }
+    // 获取 symbol属性
+    console.log(Object.getOwnPropertySymbols(obj));
+
+
+    var s=Symbol('a');
+    // symbol 不能参与运算
+//    console.log(s+1);
+//    console.log(s+'a');
+    console.log(!!s);
+    console.log(Boolean(s));
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

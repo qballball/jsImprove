@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<input id="btn1" type="button" value="跳转"/>
+<input id="btn2" type="button" value="关闭"/>
+
+
+<a href="http://www.baidu.com" target="_blank">夏鸥哦嘻嘻</a>
+
+<script>
+   // bom  浏览器对象模型 都是通过window来调用
+   var win=null;
+   // open(url,打开方式  _self _blank .. .默认是新窗口_blank) 打开一个新窗口
+   btn1.onclick= function () {
+       // 返回该窗口的window对象
+//       var win=window.open('http://www.baidu.com','');
+//       var win=window.open('','');
+       win=window.open();
+       win.document.body.style.background='red';
+
+   };
+
+    // close() 关闭浏览器
+    btn2.onclick= function () {
+        // 禁止设置了
+//        window.close();
+        // 可以关闭通过js打开的窗口
+        win.close();
+    };
+
+
+    // window 属性
+    // 浏览器的版本信息
+    console.log(window.navigator.userAgent);
+
+
+    // window.location
+   var arr1=[1,23332,111,22];
+
+    console.log(window.location);
+
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<h1>解构赋值</h1>
+<script>
+
+    var obj1={
+      name:"qq",
+      age:12,
+      c:true,
+
+      e:100,
+      f:9
+    };
+
+    //第1种赋值方法： 取obj.name,并且var name=***;
+//    var {name}=obj1;
+//    console.log(name);
+
+    //第2种
+    var name='',age='';
+    // 如果想在声明后解构赋值，需要加（），表示单独对象
+    ({name,age}=obj1);
+    console.log(name,age);
+
+
+    // 对对象key进行重命名|别名 将对象name改为str赋值
+    var {name:str}=obj1;
+    console.log(str);
+
+
+    // obj.c如果在上面对象内不存在，在此给它一个默认值10
+    var {c=10}=obj1;
+    console.log(c);
+
+    // 将gender的值起名字叫g变量 并赋默认值 male
+    var{gender:g='male'}=obj1;
+    console.log(g);
+
+
+    var arr='yunlulu'.split('');
+    console.log(arr);
+    // 第1项，第2项,空着,第4项
+    var [f,s,,t]=arr;
+    console.log(f,s,t);
+
+    arr[0]=undefined;
+    console.log(arr);
+
+    // 支持默认值
+    var [u=100,v,w]=arr;
+    console.log(u,v,w);
+
+    // 支持剩余模式 将尾部剩余的用...变量形式存为数组
+    var [a1,,b1,...r1]=arr;
+    console.log(a1,b1,r1);
+
+    var {e,f,...t}=obj1;
+    // 将剩余的捆绑为对象
+    console.log(e,f,t);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<h1>函数扩展</h1>
+
+
+<script>
+    function add(a,b) {
+        // 如果b没传给一个默认是
+//        var _b=b||88;
+        var _b=b===undefined?88:b;
+        return a+_b;
+    }
+    console.log(add(2,20));
+    // 如果第二个值没传
+    console.log(add(2));
+    // 如果是0 就会有问题
+    console.log(add(2,0));
+
+    // 上面判断过于复杂
+
+//    可以在函数直接给默认值
+    function add1(a,b=100) {
+        return a+b;
+    }
+    console.log(add1(10));
+    console.log(add1(10,undefined));
+
+    // 剩余参数，只能是最后一个参数，后面再写会有问题
+    function fn(a,b,...r) {
+//        console.log(a,arguments);
+        // 如果想打印除了a之外的参数
+        console.log(a,r);
+    }
+    fn(1,2,3,4,5);
+
+
+    // 箭头函数
+
+   /* function add2(a,b) {
+        return a+b;
+    }*/
+
+    /*var add2=(a,b)=>{
+        return a+b;
+    };*/
+    // 语句只有一句的时候可以省略{}、return
+    var add2=(a,b)=>
+        a+b;
+
+    console.log(add2(10,20));
+
+    // 如果要返回对象 在外层加一个小括号
+    var o1=(a,b)=>({c:1});
+    console.log(o1());
+    // for外面的标签不需要加括号
+    var o2=(a,b)=>{
+        qq:for(var c=0;c<10;c++){
+            console.log(c);
+            if(c==3){
+                break qq;
+            }
+        }
+    }
+    o2();
+
+    // 如果箭头函数的参数只有一个，可以不加括号，如果没有参数，括号必须存在
+    var o3=a=>a*100;
+    console.log(o3(10));
+    var o4=()=>15*100;
+    console.log(o4());
+
+
+    var arr2=[21,22,236,44,55,26];
+    var res1=arr2.filter(function (val,index) {
+        return val>200;
+    });
+    console.log(res1);
+
+    var res2=arr2.filter(item=>item>200);
+    console.log(res2);
+
+    // 箭头函数对改变指向无效，
+    // arguments无效,但可以通过...*来代替arguments
+    // 箭头函数不能通过new来创建
+    var fn= (...r)=>{
+//      console.log(this);
+//      console.log(arguments);
+
+        console.log(r);
+    };
+    fn(1,2,3,4,5);  //window
+    //
+//    var c=new fn();
+
+    document.onclick= function () {
+        fn();
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

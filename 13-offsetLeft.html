@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;}
+
+
+        #div1{          background-color: red;
+            position: relative;
+            width: 100px;
+            height: 100px; margin: 100px;
+        }
+        #div2{width: 60px; height: 60px;;
+            position: relative; left: 10px;;
+            /*border的宽度不计算offsetLeft其中*/
+            margin: 20px; border: 1px solid #444;
+            background-color: yellow;}
+
+        #div3{  width: 30px; height: 30px; background-color: blue;
+            position: absolute;
+            top: 40px; left: 25px; border: 10px solid #00ccff;
+            margin:10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div>
+    <div id="div1">
+        <div id="div2">
+
+            <div id="div3"></div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<script>
+var div3=document.getElementById('div3');
+// offsetLeft： 外边框到有定位父级的内边框的左边距离
+// offsetTop： 外边框到有定位父级的内边框的上边距离
+// 如果父级以及组先都没有定位，是相对于body
+// offsetLeft=margin-left + left
+console.log(div3.offsetLeft);
+// offsetTop=margin-top + top
+console.log(div3.offsetTop);
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;}
+
+        div{
+            padding: 100px;
+        }
+        #div1{          background-color: red;
+            position: relative;
+        }
+        #div2{
+            position: relative;          background-color: yellow;}
+
+        #div3{          background-color: blue;
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+
+<div>
+    <div id="div1">
+        <div id="div2">
+
+            <div id="div3"></div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<script>
+var div3=document.getElementById('div3');
+// offsetParent： 最近的有定位属性的祖先节点 ,如果父级或者祖先级没有定位 相对于body
+console.log(div3.offsetParent);
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

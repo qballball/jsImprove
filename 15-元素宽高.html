@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1{width: 200px; height: 200px; border: 10px solid #333;
+
+        padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="div1">
+    哈哈哈哈水电费大幅度 <br/>哈哈水电费大幅度 <br/>哈哈哈哈水电费大幅度 <br/></div>
+
+
+<script>
+    // clientWidth 不计算边框和padding,只计算显示边框不计算内容
+    console.log(div1.clientWidth);
+    // 计算宽度和边框,padding
+    console.log(div1.offsetWidth);
+
+    // 可视区域的宽高
+    console.log(document.documentElement.clientWidth);
+    console.log(document.documentElement.clientHeight);
+
+
+
+</script>
+
+</body>
+</html>

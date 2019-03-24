@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;}
+        #tip{
+            display: none;
+            background-color:#00ffff; border: 1px solid #000080; padding:10px 20px;
+            position: absolute;}
+        #box{width:100px; height: 100px; border: 10px solid #333; margin-top: 400px;margin-left: 400px;}
+    </style>
+</head>
+<body>
+<div id="tip">
+我是内容
+</div>
+
+<div id="box">
+
+</div>
+
+
+<script>
+    var tip=document.querySelector("#tip"),
+            down=false;
+
+
+    var boxDis=getRect("#box");
+        console.log(boxDis);
+
+    // 获取元素在页面的位置
+    function getRect(dom) {
+
+        /*
+        *
+        * rectObject.top：元素上边到视窗上边的距离;
+         // 注意
+         rectObject.right：元素右边到视窗左边的距离;
+
+         　rectObject.bottom：元素最底部到视窗上边的距离;
+
+         　rectObject.left：元素左边到视窗左边的距离;
+        * */
+
+        var obj={},
+            boxDis=document.querySelector(dom).getBoundingClientRect();
+        obj={left:boxDis.left,top:boxDis.top,bottom:boxDis.bottom,right:boxDis.right,width:boxDis.width,height:boxDis.height};
+        return obj;
+
+    }
+
+
+    document.onmousedown= function (e) {
+        console.log('按下');
+        tip.style.display= 'block';
+        tip.style.background= '#ff0';
+        tip.style.left= e.clientX+'px';
+        tip.style.top= e.clientY+'px';
+        down=true;
+    };
+
+    document.onmousemove= function (e) {
+        if(down){
+            tip.style.left= e.clientX+'px';
+            tip.style.top= e.clientY+'px';
+
+        }
+
+        // 取消浏览器的默认行为 选中等
+        e.preventDefault();
+
+    };
+
+    document.onmouseup= function (e) {
+        var tipDis=getRect("#tip");
+        if(tipDis.left<boxDis.left-tipDis.width/2 || tipDis.top<boxDis.top-tipDis.height/2 || tipDis.left>boxDis.right-tipDis.width/2 || tipDis.top>boxDis.bottom-tipDis.height/2){
+            tip.style.display= 'none';
+            return;
+
+        }
+        console.log('enter');
+        tip.style.background= '#f00';
+        console.log('松开');
+        down=false;
+
+
+    };
+</script>
+
+
+</body>
+</html>

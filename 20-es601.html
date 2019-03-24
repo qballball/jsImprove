@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>title</title>
+
+</head>
+<body>
+
+
+<script>
+    console.log(a);
+    var a=1;
+    console.log(a);
+
+    // let 不支持变量预解析
+//    console.log(b);   // 会报错
+    let b=2;
+    // let 不支持重复声明
+//    let b=3;    // 会报错
+      console.log(b);
+
+
+
+    {
+        var a1=1;
+    }
+    console.log(a1);
+    // 快捷作用域：只在这个块有作用
+    {
+        let b1=10;
+        console.log(b1);
+    }
+//    console.log(b1);  // 会报错
+
+
+
+//    const c;  // 会报错
+    // 如果希望这个值是常量，不能被修改，那么可以用const
+    const c=3.14;
+//    c=10;   // const 不能重复赋值
+    console.log(c);
+
+
+    const obj={};
+//    obj=1;
+    // 可以对对象进行修改 但是不能给对象直接赋值
+    obj.name='kimmi';
+    console.log(obj);
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

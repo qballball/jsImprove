@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box1{width: 100px; height: 100px;
+            padding: 10px;
+            border: 10px solid #333; }
+    </style>
+</head>
+<body style="height: 2000px;">
+<div id="box1"></div>
+<div class="box2" style="width:100px; height: 100px; border: 1px solid #333; padding: 20px;">
+    <div class="box3" style="height: 200px;width: 100px; background-color:#f00;"></div>
+</div>
+
+
+<script>
+    var box1=document.querySelector("#box1");
+
+    /*
+    * 可视区（肉眼可见）尺寸  不管body是3000 还是50000
+    * */
+
+    console.log(document.documentElement.clientWidth);
+   console.log(document.documentElement.clientHeight);
+    // 不包括边框
+   console.log(box1.clientWidth);
+
+
+
+    document.onclick= function () {
+        /**
+         * 滚动条滚动距离
+          */
+        //兼容写法： 谷歌|ie
+//        console.log(document.documentElement.scrollTop||document.body.scrollTop);
+        // 里面内容的高度
+//        console.log(document.querySelector(".box3").scrollHeight);
+
+       // 获取内容的高度 padding+margin+border
+        console.log(document.documentElement.offsetHeight);
+
+
+
+    };
+
+    /**
+     * onscroll 当滚动条滚动时候触发
+     * onresize 当窗口大小发生改变时候触发
+     */
+
+    window.onscroll=function () {
+        console.log(document.documentElement.scrollTop);
+    };
+
+
+    window.onresize= function () {
+        console.log('width:'+window.innerWidth+'height:'+window.innerHeight);
+    };
+
+
+
+    // event 是一个内置全局对象 必须在事件调用时候使用
+
+    // event 是事件出参的第一个对象
+    console.log(event);  // undined
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<h1>对象新增</h1>
+
+
+<script>
+var a= 1,
+    obj={a:a,
+        fn: function () {
+        console.log('fn');
+    }},
+    // 还可以这么写
+    obj1={a,
+        fn(){
+    console.log('fn111');
+
+},
+// 混合写
+b:10};
+    console.log(obj);
+    console.log(obj1);
+    console.log(obj1.b);
+    obj.fn();
+    obj1.fn();
+
+var attrname='width',
+    attrObj={},
+    attrFn='fn';
+var obj2={
+    // 根据变量的值改变
+    [attrname]:100,
+        // 对象不支持键值
+    [attrObj]:'hello',
+    [attrFn](){
+        console.log('attrFn');
+}
+};
+    console.log(obj2.width);
+    console.log(obj2);
+    obj2.fn();
+
+
+    console.log(1===1);
+    console.log("1"==1);
+
+    console.log(NaN===NaN);
+    console.log(NaN==NaN);
+
+    // 判断两个值是否一样 和===有点类似
+    console.log(Object.is(1,1));
+    console.log(Object.is(1,"1"));
+    console.log(Object.is(NaN,NaN));
+
+    // 比较两个对象
+    console.log(Object.is({},{}));
+    var obj3={};
+    console.log(Object.is(obj3,obj3));
+
+
+// 配置默认值
+function move(obj) {
+    var defObj={
+        ease:'linear',
+        duration:1500
+    };
+    /*var para={
+      ease:obj.ease||defObj.ease,
+      duration:obj.duration||defObj.duration
+
+    };*/
+//    console.log(para);
+    var para={};
+    Object.assign(para,defObj,obj);
+    console.log(para,defObj);
+
+
+
+
+}
+move({
+   ease:'easeIn'
+});
+
+    var k={
+        a:1,
+        b:2}
+// 键值数组
+console.log(Object.keys(k));
+console.log(Object.values(k));
+console.log(Object.entries(k));
+//for(attr of k){
+for(var[key,val] of Object.entries(k)){
+    console.log(key,val);
+}
+
+var k1={
+    a:1,
+    b:2
+}
+var k2={
+  /*a:1,
+    b:2,*/
+   ...k1
+
+//    c:3
+};
+    console.log(k2);
+
+
+ var arr1=[1,2,3,4,100];
+  // 将arr打散
+  console.log(...arr1);
+  // 应用场景
+    console.log(Math.max(1,2,3,49,30,41,100));
+    console.log(Math.max(...arr1));
+
+  // 数组去重
+   var arr=[1,2,3,1,2,3,4,5,6,7,8,20];
+
+    var res=new Set(arr);
+    console.log(res);
+    // 将set转为数组形式
+    var res1= [...new Set(arr)];
+    console.log(res1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

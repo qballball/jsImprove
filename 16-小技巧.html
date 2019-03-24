@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="box1">
+
+</div>
+
+
+<script>
+    var box1 = document.querySelector("#box1");
+    // 字符串拼接如何换行不用每行都再加引号？
+    /*box1.innerHTML='<p>sfdsfdf</p>' +
+     '<a href="#">111</a>' +
+     '<p>dskfdgfdfg</p>';*/
+
+
+    box1.innerHTML = '<p>sfdsfdf</p>\
+            <a href="#">111</a>\
+            <p>dskfdgfdfg</p>';
+
+
+    // console的用法
+    console.log('aaa');
+    var a = 'hello';
+    // console 给文字加样式
+    console.log('%c' + a, 'font-size:40px;color:#f00; background:#0ff;');
+
+    // typeof() 加括号也可以 instanceof  in....
+
+    var arr = [];
+    console.log(typeof arr);
+    console.log(typeof(arr));
+
+    console.log(arr instanceof(Object));
+
+
+    for (var i = 0; i < 5; i++) {
+        for (var j = 0; j < 1; j++) {
+            if (i == 3) {
+                // 只跳出j循环
+                break;
+            }
+            // 0 1 2 4
+            console.log(i);
+        }
+    }
+
+    // 给for循环加上c标签
+    c:
+            for (var i = 0; i < 5; i++) {
+                for (var j = 0; j < 1; j++) {
+                    if (i == 3) {
+                        // 可跳出指定循环 break c 结束了整个循环
+                        break c;
+                    }
+                    // 0 1 2
+                    console.log(i);
+                }
+            }
+
+
+    // call
+    var obj1={aaa: function () {
+        console.log(this);
+    }};
+
+    obj1.aaa();
+    var ddd=[1,2,3];
+    var ccc=1;
+    var ttt={a:'hahahaha'};
+    obj1.aaa.call(ddd);
+    obj1.aaa.call(ccc);
+    obj1.aaa.call(ttt);
+    obj1.aaa.call(window);
+    // 什么都不写指向window
+    obj1.aaa.call();
+
+    // 匿名函数自执行 在前面写+ 后面写括号
+    +function () {
+        console.log(111);
+    }();
+
+    // 面向对象
+    function Eee() {
+
+    }
+    // 写不写后面的括号都可以
+    var e1=new Eee();
+    var e2=new Eee;
+    console.log(e1);
+    console.log(e2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

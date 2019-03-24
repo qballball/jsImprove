@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        li{width: 20px; height: 30px;
+            background-color: red;  transition:1s;
+            margin-bottom: 10px;;}
+    </style>
+</head>
+<body>
+<div id="div1">的说法地范德萨   <span>111</span>
+
+<!--这是注释-->
+
+</div>
+<ul id="oUl">
+    <li><span></span></li>
+    <li><span></span></li>
+    <li><span></span></li>
+    <li></li>
+</ul>
+
+
+<script>
+// document 提供了一些api ,赋予开发者操作页面的能力
+/*
+   一般三大关系：
+   父级关系  （从当前元素往上找的包裹元素）
+   子级关系  （父级下的一层关系）
+   兄弟关系  同一个父级
+
+   父子节点 上下两层节点之间
+   祖先节点  当前节点上面的所有节点的统称
+   子孙节点 当前节点下面的所有节点的统称
+
+
+   按照节点类型（nodeType）：
+   元素节点:数字1
+   document:数字9
+   注释:数字8
+   文本节点：3 文本和空空格、换行都算
+   属性节点：2
+
+   childNodes: 获取某个节点下的所有子节点
+   children: 获取某个节点下的所有元素子节点
+   attributes: 获取某个节点下的所有属性节点
+   nodeName: 节点名
+   nodeVlue: 节点属性
+
+
+ */
+
+    var div1=document.getElementById("div1");
+    console.log(div1.nodeType); //1
+    console.log(document.nodeType); //9
+    console.log(div1.childNodes); //
+    console.log(div1.childNodes[0]); // 里面的那串文字
+    console.log(div1.childNodes[0].nodeType); //3
+    console.log(div1.childNodes[1].nodeType); //1 是span标签 元素节点
+    console.log(div1.childNodes[3].nodeType); //8
+    console.log(div1.childNodes[3].nodeValue); //注释文字
+    console.log(div1.childNodes.length); //
+    console.log(div1.attributes); // 获取元素所有属性
+    console.log(div1.attributes[0].nodeType); //
+    console.log('属性名：'+div1.attributes[0].nodeName+'属性值：'+div1.attributes[0].nodeValue); //属性值
+    
+    
+    
+    var ul=document.getElementById("oUl");
+//    var liList=ul.childNodes; // 所有子元素节点
+    var liList=ul.children; // 只是元素节点，兼容所有浏览器
+    console.log(liList);  //9： 把换行（文本节点）和 元素标签（元素节点）都算上了
+    document.onclick= function () {
+        /*for(var i=0;i<liList.length;i++){
+            // 如果是元素节点
+            if(liList[i].nodeType==1){
+                liList[i].style.width='150px';
+            }
+        }*/
+        for(var i=0;i<liList.length;i++){
+         liList[i].style.width='150px';
+         }
+
+
+    };
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

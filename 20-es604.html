@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<h1>map</h1>
+<script>
+
+    var obj={
+        name:'yunlulu'
+
+    };
+    var momo={
+      name:'m'
+    };
+console.log(momo.toString());
+    obj[momo]=1;
+    console.log(obj);
+
+    var m=new Map([['name','yunlulu']]);
+    console.log(m);
+    console.log(m.size);
+    console.log(m.get('name'));
+    m.set('age',100);
+    console.log(m);
+
+    var mm={'name':'m'};
+    // 可以达到将对象作为键值，并同时赋值value
+    m.set(mm,1);
+    console.log(m);
+    //删除mm key
+    m.delete(mm);
+    console.log(m);
+    // 返回对象是否存在该属性
+    console.log(m.delete('dd'));
+    console.log(m.has('name'));
+
+
+    // 清空对象
+//    m.clear();
+
+    var obj={};
+    m.set(obj,2);
+    m.set(obj,21);
+    console.log(m);  //取最后一次的赋值
+
+
+    // 虽然都是空的 但是这里是不同的对象 需要注意
+    m.set({},22);
+    m.set({},33);
+    console.log(m);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

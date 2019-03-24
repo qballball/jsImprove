@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<h1>class类</h1>
+
+<script>
+    // 构造函数
+    function Person(name,age) {
+        this.name=name;
+        this.age=age;
+
+    }
+    Person.prototype.say= function () {
+        console.log(this.name+'say!!!');
+    };
+
+    var p=new Person('hello',20);
+    console.log(p);
+    p.say();
+
+    // class 形式
+    class Per{
+        constructor(name,age){
+            this.name=name;
+            this.age=age;
+        }
+        say(){
+            console.log(this.name+'说吧！');
+        }
+        eat(){
+            console.log(this.name+'吃吃吃！');
+        }
+    }
+    var p2=new Per('yunlu',222);
+    console.log(typeof Per);
+    console.log(p2);
+    p2.say();
+    console.log(Per.prototype);
+    p2.eat();
+    // 不可枚举
+    console.log(Object.keys(Per.prototype));
+
+
+    class Pers{}
+    var s=new Pers();
+    console.log(s);
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

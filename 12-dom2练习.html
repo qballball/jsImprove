@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;}
+        li{list-style: none;}
+        ul{
+            width: 200px;
+            background-color: #999;
+        }
+        li{
+            line-height: 30px;}
+        li:first-child{    background-color: #333;}
+        li:last-child{    background-color: #333;}
+    </style>
+</head>
+<body>
+<ul id="oUl">
+    <li>首</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>末</li>
+</ul>
+
+
+<script>
+    var oUl=document.getElementById('oUl');
+    var lis=oUl.children;
+    for(var i=0;i<lis.length;i++){
+        lis[i].index=i;
+        lis[i].onmouseover=function () {
+//            if(this.index==0 || this.index==lis.length-1){
+            if(this==oUl.firstElementChild || this==oUl.lastElementChild){
+                this.style.background='orange';
+                return;
+            }
+            this.style.background="#f00";
+//            if(this.nextElementSibling && this.nextElementSibling.index!=lis.length-1){
+            if(this.nextElementSibling && this.nextElementSibling!=oUl.lastElementChild){
+                this.nextElementSibling.style.background="#0ff";
+            }
+            if(this.previousElementSibling && this.previousElementSibling!=oUl.firstElementChild){
+                this.previousElementSibling.style.background="#0ff";
+            }
+
+
+        };
+        lis[i].onmouseout=function () {
+            if(this.index==0 || this.index==lis.length-1){
+                this.style.background='#333';
+                return;
+            }
+            this.style.background="";
+            this.previousElementSibling.style.background="";
+            this.nextElementSibling.style.background="";
+
+
+
+        };
+    }
+</script>
+
+
+</body>
+</html>

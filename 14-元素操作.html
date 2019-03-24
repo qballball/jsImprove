@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="div1" index="6"></div>
+
+<img id="img1" src="../../哈哈哈/1.jpg" alt=""/>
+
+
+<script>
+  //获取元素行间属性 显性的 getAttribute
+   var div1=document.getElementById("div1");
+   console.log(div1.getAttribute('id'));
+   console.log(div1['id']);
+   // 这个不会出来 这是隐性设置属性
+   div1.index=1;
+   console.log(div1.getAttribute('index'));
+
+    // 设置元素的行间属性
+    div1.setAttribute('index',3);
+
+    // 删除元素属性
+    div1.removeAttribute('index');
+// 这样的地址容易乱码 所以url地址不作为判断条件
+console.log(img1['src']);
+  // 但是通过getAttribute 就可以获取真实的路径 不会乱码  ie7有些时候的地址不太兼容
+console.log(img1.getAttribute('src')=='../../哈哈哈/1.jpg');
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<h1>promise</h1>
+
+
+<script src="js/jquery.js"></script>
+
+<script>
+
+    function send(url,callback) {
+        /*$.ajax({
+            url:'../a',
+            data:{a:1,b:2},
+            succuess: function () {
+            // 嵌套请求
+         $.ajax({
+         url:'../a111',
+         data:{a:1,b:2},
+         succuess: function () {
+
+         }
+         })
+            }
+        })*/
+
+
+
+
+    }
+
+    // 异步编程解决方案
+    // 后面括号内必须是一个函数
+    // 默认状态pending
+    var p=new Promise((resolve,reject)=>{
+        console.log('实例化...');
+//        resolve(); // 成功
+         // 通常成功之后
+        return resolve({data:'我是数据'});
+//        reject(); // 失败
+    });
+    console.log(p);
+
+    p.then((data)=>{
+       console.log('then',data);
+    });
+
+    // 152634
+    console.log(1);
+    // 会把任务推到最后执行
+    setTimeout(()=>{
+        console.log(3);
+    })
+    setTimeout(()=>{
+        console.log(4);
+    });
+    var p1=new Promise((res,rej)=>{
+        console.log(5);
+        res();
+    })
+    // 微任务
+    p1.then(()=>{
+        console.log('6');
+    });
+    // 宏任务
+    console.log(2);
+
+
+    var p2=new Promise((res,rej)=>{
+//       res('成功啦');
+       rej('失败啦');
+    });
+    // 第一个fun成功，第二个fun是失败
+    p2.then((data)=>{
+        console.log(data);
+    }/*,(data)=>{
+        console.log('失败',data);
+    }*/);
+    // 如果失败的时候
+    p2.catch(()=>{
+       console.log('失败1111');
+    });
+
+    // .then 可以链式写法
+
+    var p3=new Promise((res,rej)=>{
+       res('成功啦');
+    });
+    var p4=p3.then(()=>{
+        return '4445444';
+        //console.log('p4');
+    });
+
+    console.log(p4);
+    p4.then(data=>{
+        console.log(`p4 then:${data}`);
+    });
+
+
+
+    var p5=new Promise((res,rej)=>{
+        res('成功5555');
+    });
+    var res=p5.then(()=>{
+        console.log(1);
+       a
+    // 不会影响后续代码的执行
+
+    }).catch((err)=>{
+        console.log(err);
+    // 不管成功还是失败 都会走这个final
+    }).finally(()=>{
+       console.log('执行完啦!!!!');
+    });
+    console.log(res);
+    console.log('dddddddddddddd');
+
+
+    var z1=new Promise((res,rej)=>{
+            res();
+    });
+    z1.then(()=>{ console.log(126);})
+
+//    .then(()=>{return new Promise((res,rej)=>{res();});})
+    // 和上面写法一致 只不过这个是成功返回的
+//    .then(()=>{return Promise.resolve(200)})
+//    .then(()=>{return Promise.reject(131400)})
+
+    .then((data)=>{console.log(data);}).catch((data)=>{
+        console.log(data);
+    });
+
+    // 如果有多个promise对象 可以用 promise.all([p1,p2,p3对象])来检测他们是否完成;
+    // 如果有多个promise对象 可以用 promise.race([p1,p2,p3对象])来检测他们谁最先完成用谁的;
+    var n1=new Promise((res)=>{
+    setTimeout(()=>{
+            res('n1')
+        },1000);
+    })
+
+    var n2=new Promise((res)=>{
+        setTimeout(()=>{
+            res('n2')
+        },1500);
+    })
+    var n3=new Promise((res)=>{
+        setTimeout(()=>{
+            res('n3')
+        },500);
+    });
+
+    var t=Promise.all([n1,n2,n3]);
+    t.then(data=>{
+        console.log(data);
+    })
+
+    var t1=Promise.race([n1,n2,n3]);
+    t1.then(data=>{
+        console.log(data);
+    })
+
+
+
+
+</script>
+
+</body>
+</html>
