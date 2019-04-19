@@ -24,33 +24,23 @@
     <script>
         var box1=document.querySelector("#box1");
         var box2=document.querySelector("#box2");
-        console.log(box1);
-    var box1Ani=box1.animate([
-     // keyframes
-     { transform: 'translateY(0px)' },
-     { transform: 'translateY(200px)',offset:0.9 },
-     { transform: 'translateY(300px)' }
-     ], {
-     // timing options
-     duration: 2000,
-//     iterations: 'Infinity',
-      // 是否停留在最后一帧
-     fill:'forwards'
-     },1000,'linear', function () {
-                console.log(1);
-            }
 
-    );
-        // 完成动画后的回调
-        box1Ani.onfinish= function () {
-            console.log('finish');
-            var box2Ani=box2.animate([{opacity:0},{opacity:1}],3000);
-
-        }   ;
-
-        console.log(box1Ani);
-
-
+        function anis(obj,keyframes,options) {
+            return new Promise((res,rej)=>{
+                var ani=obj.animate(keyframes,options,2000,'ease-in');
+                ani.onfinish=function () {
+                    console.log('finish');
+                    res(['赫尔呵呵']);
+                }
+            })
+        }
+        anis(box1,[
+            { transform: 'translateY(0px)' },{ transform: 'translateY(200px)',offset:0.9 },{ transform: 'translateY(300px)' }],
+            {duration: 2000,  fill:'forwards'})
+            .then((data)=>{
+                console.log(data);
+                anis(box2,[{opacity:0},{opacity:1}],{duration: 4000,fill:'forwards',delay:2000})
+        });
 
 
 
