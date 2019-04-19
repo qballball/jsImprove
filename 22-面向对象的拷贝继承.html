@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+    var a={name:'小明'};
+    var b=a;
+    b.name=a;
+    b.name='小强';
+    // 对象的引用 会被改变，a也会变成小强，如何a还是小明？
+    console.log(a.name);
+
+
+   var a1={name:'小A'},b1={};
+   for(var attr in a1){
+       b1[attr]=a1[attr];
+   }
+   b1.name='小b';
+   console.log(a1,b1);
+
+
+
+
+
+
+    function extend(obj1,obj2) {
+        for(var attr in obj2){
+            obj1[attr]=obj2[attr];
+        }
+    }
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

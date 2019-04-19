@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box{width:100px; height: 100px;
+            position: absolute;top:0px; }
+        #box1{  background-color: #f00; left: 0px; }
+        #box2{  background-color: #f0f; left: 100px; }
+        #box3{  background-color: #0ff; left: 200px; }
+        #box4{  background-color: #00f; left: 300px; }
+    </style>
+
+</head>
+
+
+
+<body>
+<!--box1:随意拖拽 box2:有范围的拖拽-->
+<div class="box" id="box1"></div>
+<div class="box" id="box2"></div>
+<div class="box" id="box3"></div>
+<div class="box" id="box4"></div>
+
+
+
+<script>
+
+
+    function Drag() {
+        this.obj=null;
+        this.disX=0;
+        this.disY=0;
+        this.settings={
+          toDown: function () {
+
+          },
+          toUp: function () {
+
+          }
+        };
+    }
+
+    // 解决 1.参数过多容易搞错
+    // 2.当没有这个参数的时候会报错 解决：配置参数没有，用默认参数
+
+    Drag.prototype.init= function (opt) {
+        var self=this;
+        this.obj=document.getElementById(opt.id);
+        self.obj.move=false;
+        // this.settings 为默认参数，opt为配置参数，将配置参数合并到默认参数
+        extend(this.settings,opt);
+        self.obj.onmousedown= function (ev) {
+            var ev=ev||window.event;
+            self.obj.move=true;
+            self.settings.toDown();
+            self.fnDown(ev);
+
+        }
+        self.obj.onmousemove=function (ev) {
+            var ev=ev||window.event;
+            if(self.obj.move){
+                self.fnMove(ev);
+            }
+        };
+        self.obj.onmouseup=function (ev) {
+            self.settings.toUp();
+            self.obj.move=false;
+        };
+
+    };
+    Drag.prototype.fnDown= function (e) {
+        this.disX= e.clientX-this.obj.offsetLeft;
+        this.disY= e.clientY-this.obj.offsetTop;
+    };
+
+    Drag.prototype.fnMove= function (e) {
+        this.obj.style.left= e.clientX-this.disX+"px";
+        this.obj.style.top= e.clientY-this.disY+"px";
+    };
+
+    //  限制范围的继承
+    function ChildDrag(id) {
+        // 属性的继承
+        Drag.call(this,id);
+
+    }
+    // 方法的继承
+    extend(ChildDrag.prototype,Drag.prototype);
+
+    //   重写
+    ChildDrag.prototype.fnMove= function (e) {
+        var  l=e.clientX-this.disX;
+        var  t=e.clientY-this.disY;
+        if(l<0){
+            l=0;
+        }else if(l>window.innerWidth-this.obj.offsetWidth){
+            l=window.innerWidth-this.obj.offsetWidth;
+        }
+        if(t<0){
+            t=0;
+        }else if(t>window.innerHeight-this.obj.offsetHeight){
+            t=window.innerHeight-this.obj.offsetHeight;
+        }
+        this.obj.style.left= l+"px";
+        this.obj.style.top=t+"px";
+    };
+
+
+
+
+
+
+    var box1=new Drag();
+    box1.init({id:'box1'});
+
+    var box2=new Drag();
+    box2.init({id:'box2',toUp:function () {
+        document.title='up2!';
+    },toDown:function () {
+        document.title='down2!';
+    }});
+
+
+
+    var box3=new Drag();
+    box3.init({id:'box3',toDown:function () {
+        document.title='down3!';
+    }});
+
+
+
+    var box4=new Drag();
+    // 弹起时候 up4
+    box4.init({id:'box4',
+        toUp:function () {
+        document.title='up4!';
+    }});
+
+//    var box2=new ChildDrag("box2");
+//    box2.init();
+
+    function extend(obj1,obj2) {
+        for(var attr in obj2){
+            obj1[attr]=obj2[attr];
+        }
+    }
+
+
+
+</script>
+
+</body>
+</html>

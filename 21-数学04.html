@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+
+        .ball{border-radius: 50%;  position: absolute;
+              }
+        .ball1{background-color:hotpink;
+            top:250px; left: 10px;width: 100px; height: 100px;
+        }
+        .ball2{ left: 400px;width: 200px; height: 200px;
+            top:100px;background-color: blue;  }
+    </style>
+</head>
+<body>
+<h1>圆的碰撞检测</h1>
+
+ <div class="ball ball1"></div>
+ <div class="ball ball2"></div>
+ <script src="js/jquery.js"></script>
+
+
+
+
+ <script>
+     var ball1=$(".ball1");
+     var ball2=$(".ball2");
+     ball2Obj={
+       cx:500,
+       cy:200
+     };
+
+
+
+
+
+     var t=setInterval(
+             ()=>{
+         $(".ball1").css({"left":$(".ball1").offset().left+10+"px"});
+         var a=ball1.offset().left+50-ball2Obj.cx,
+         b=ball1.offset().top+50-ball2Obj.cy,
+             c=Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+     console.log(c);
+        if(c<=100+50){
+           console.log(`碰上了！`);
+            clearInterval(t);
+
+        }
+
+     },30);
+
+
+ </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

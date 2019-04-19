@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box{position: absolute;top:0px; left: 0px;
+            background-color: #000080; width: 50px; height: 50px;}
+    </style>
+</head>
+<body>
+
+<div id="box">
+
+</div>
+
+
+<script src="js/tween.js"></script>
+
+<script>
+    var box=document.getElementById("box");
+
+
+
+    function getStyle(obj,attr) {
+        if(obj.currentStyle){
+            return parseInt(obj.currentStyle[attr]);
+        }else{
+            return parseInt(getComputedStyle(obj,false)[attr]);
+        }
+    }
+    console.log(getStyle(box,'height'));
+    console.log(getStyle(box,'top'));
+
+    var def={
+      left:0,
+      top:0,
+      width:50,
+      height:50
+    };
+   /* function move(obj,attr,start,end) {
+        //b:初始步数(这个要不断变化）
+        //t:初始值
+        //c:目标值
+        //d:总步数
+
+       var styles=getStyle(obj,attr),
+           step=0;
+       var k=setInterval(function () {
+           var dis1=Tween.Linear(step,styles,end,20);
+           if(step>=20){
+               clearInterval(k);
+               dis1=end;
+           }else{
+               step++;
+           }
+           obj.style.left=dis1+'px';
+       },24);
+    };*/
+
+    function move(obj,attr,start,end) {
+        //b:初始步数(这个要不断变化）
+        //t:初始值
+        //c:目标值
+        //d:总步数
+
+        return new Promise((res,rej)=>{
+            var styles=getStyle(obj,attr),
+            step=0;
+        var k=setInterval(function () {
+            var dis1=Tween.Linear(step,styles,end,20);
+            if(step>=20){
+                clearInterval(k);
+                dis1=end;
+                res();
+            }else{
+                step++;
+            }
+            obj.style[attr]=dis1+'px';
+        },24);
+        })
+    };
+
+    move(box,'left',0,400).then(()=>{move(box,'top',0,200)});
+
+
+
+
+
+
+
+
+
+
+
+
+    /*function movePromise( obj,attr,target,duration ){
+        return new Promise( (res,rej)=>{
+            var b = parseInt(getComputedStyle(obj)[attr]);
+        var c = target - b;
+        var d = duration;
+        var temp = new Date().getTime();
+        var timer = setInterval( function(){
+            var t = new Date().getTime()-temp;
+            if( t >= d ){
+                clearInterval( timer );
+                t = d;
+            }
+            var v = c/d*t+b ;
+            obj.style[attr] = v + "px";
+            if( t === d ){
+                res()
+            }
+        },20 )
+    } )
+    }*/
+   /* movePromise( box,"width",200,500 )
+            .then( ()=>movePromise( box,"height",300,1000 ) )
+    .then( ()=>movePromise( box,"left",300,1000 ) )
+    .then( ()=>movePromise( box,"top",200,1000 ) )
+    .then( ()=>console.log( "done" ) )*/
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

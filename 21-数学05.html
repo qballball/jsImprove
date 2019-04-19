@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1{width: 50px;  height: 50px;
+            background-color:red;
+            position: absolute; top:300px; left: 100px;}
+    </style>
+</head>
+<body>
+
+<h1>绘制sin图像</h1>
+
+<div id="div1"></div>
+<script src="js/jquery.js"></script>
+<script>
+        // 控制幅度
+    var val=60,
+
+            num= 0,
+            //
+            L=100,T=300;
+
+
+    var t=setInterval(function () {
+
+        num++;
+        $("#div1").css({"left":L+(num*Math.PI/180)*val+"px","top":T+Math.sin(num*Math.PI/180)*val+"px"});
+    },30);
+
+
+
+</script>
+</body>
+</html>

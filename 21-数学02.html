@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box{width: 50px; height: 50px; border-radius: 50%;
+            background-color:#000080; position: absolute; top: 200px; left: 400px; }
+        .center{
+            width: 50px; height: 50px; border-radius: 50%;
+            background-color:#ff1493; position: absolute; top: 200px; left: 320px;
+
+        }
+
+    </style>
+</head>
+<body>
+<div class="box ">
+    
+</div>
+<div class="center"></div>
+
+<script src="js/jquery.js"></script>
+<script>
+    // 角度和弧度的转换
+//    var a=Math.sin(2*Math.PI);
+    // 求sin30°  弧度=角度*π/180
+    var a=Math.sin(30*Math.PI/180);
+    console.log(a);
+    var center={
+      x:320,
+      y:200,
+      r:80,
+        initAngel:0
+    };
+
+
+    setInterval(()=>{
+        var x=Math.cos(center.initAngel*Math.PI/180)* center.r+center.x,
+            y=Math.sin(center.initAngel*Math.PI/180)* center.r+center.y;
+        $(".box").css({"left":x+"px","top":y+"px"})
+        center.initAngel+=10;
+
+    },24);
+
+
+
+</script>
+
+
+</body>
+</html>

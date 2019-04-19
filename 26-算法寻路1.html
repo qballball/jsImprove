@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/global.css"/>
+    <style>
+        .content{width: 400px; margin: 20px auto;border-top: 1px solid #d01212; border-left: 1px solid #d01212;}
+        #ulBox{}
+        #ulBox li{border-right: 1px solid #00a0e9;border-bottom: 1px solid #00a0e9; float: left; box-sizing: border-box}
+        /*开始的位置*/
+        #ulBox li.start{          background-color: #f00;}
+        #ulBox li.end{  background-color: #0f0;}
+        #ulBox li.obstruct{  background-color: #00f;}
+        #btn{ display: block; width: 100px;
+            line-height: 40px;
+            background-color: #09f;
+            text-align: center; color: #fff; margin: 10px auto;}
+    </style>
+</head>
+<body>
+<div class="content">
+
+<ul class="clear" id="ulBox">
+
+</ul>
+
+</div>
+<input id="btn" type="button" value="开始寻路"/>
+<img src="images/digit1.png" alt=""/>
+<img src="images/digit2.png" alt=""/>
+
+<script>
+    // 寻路模式：
+    // 深度优先搜索(层层找线路，但可能不是最优的)、
+    // 广度优先搜索（网状扩散搜索，搜索面积太大，性能可能比较耗费）、
+    // 启发式搜索（集合深度和广度）-a*搜索
+
+    // a*估价函数 f(n)=g(n)+h(n)
+    // f(n)是n节点的估价函数
+    // g(n)是初始点到n节点的实际代价（最短路径）
+    // h(n)是n节点到目标点的实际代价
+
+
+    var oUl=document.getElementById('ulBox'),
+        mapArr=[
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,2,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+        ],
+        cols=Math.sqrt(mapArr.length),
+        blank={
+            w:20
+        },
+        startLi=document.querySelector('.start'),
+        endLi=document.querySelector('.end');
+        // open队列：收集可能走的路线
+        // close 排除节点，障碍物 走过的 都不能再走了。
+        var openArr=[],closeArr=[];
+
+
+    // 初始化
+
+    init();
+
+    function init() {
+        createMap();
+
+
+    }
+
+    function createMap() {
+        for(var i=0;i<mapArr.length;i++){
+            var li=document.createElement('li');
+            if(mapArr[i]==3){
+                li.className='obstruct';
+                closeArr.push(li);
+            }else if(mapArr[i]==2){
+                li.className='end';
+            }else if(mapArr[i]==1){
+                openArr.push(li);
+                li.className='start';
+            }
+//            var textnode=document.createTextNode(i);
+//            li.appendChild(textnode);
+            li.style.width=blank.w+"px";
+            li.style.height=blank.w+"px";
+            oUl.appendChild(li);
+        }
+
+
+
+    };
+
+    btn.onclick= function () {
+        openFn();
+    };
+    //
+    function openFn() {
+        var nowLi=openArr.shift();
+        closeFn(nowLi);
+        findLi(nowLi);
+    };
+    function findLi(nowLi) {
+        var result=[];
+        for(var i=0;i<){
+
+        }
+    }
+
+
+    function closeFn(nowLi) {
+        closeArr.push(nowLi);
+    }
+
+
+
+    function f(nodeLi) {
+        return g(nodeLi)+h(nodeLi);
+    }
+
+    function g(nodeLi) {
+        var a=startLi.offsetLeft-nodeLi.offsetLeft,
+            b=startLi.offsetTop-nodeLi.offsetTop;
+        return Math.sqrt(a*a+b*b);
+    }
+
+    function h(nodeLi) {
+        var a=endLi.offsetLeft-nodeLi.offsetLeft,
+            b=endLi.offsetTop-nodeLi.offsetTop;
+        return Math.sqrt(a*a+b*b);
+    }
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

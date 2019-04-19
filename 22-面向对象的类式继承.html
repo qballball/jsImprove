@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+// js是没有类的概念的
+   // 可以把js中的构造函数看做类，
+
+// 最好：属性和方法继承的时候，分开继承
+function Aaa() {
+    this.name='小明';
+    this.arr=[1,2,3];
+
+}
+Aaa.prototype.showName= function () {
+    console.log(this.name);
+}
+
+function Bbb() {
+    // 属性继承
+    Aaa.call(this);
+}
+
+
+
+
+
+// 一句话：类继承
+//Bbb.prototype=new Aaa();
+
+var F= function () {
+};
+F.prototype=Aaa.prototype;
+Bbb.prototype=new F();
+
+
+// 但是有问题
+// 上句把Bbb的构造器改变了 覆盖了，应该改回来
+Bbb.prototype.constructor=Bbb;
+
+
+
+
+
+ var b1=new Bbb();
+//b1.showName();
+console.log(b1.constructor);
+b1.arr.push(4);
+var b2=new Bbb();
+
+// b1 arr 影响了b2.arr,目的：不能互相影响
+console.log(b1.arr);
+console.log(b2.arr);
+
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>title</title>
+	<link rel="stylesheet" href="css/global.css">
+    <style>
+        .box{     background-color: #ff000d; color: #fff; font-size: 30px;
+            text-align: center;
+            line-height: 100px; width: 100px; height: 100px;}
+        #box1{ }
+    </style>
+
+</head>
+<body>
+    <h1>web animation</h1>
+    <div class="box" id="box1">box1</div>
+
+
+    <script>
+        var box1=document.querySelector("#box1");
+        console.log(box1);
+    var box1Ani=box1.animate([
+     // keyframes
+     { transform: 'translateY(0px)' },
+     { transform: 'translateY(200px)',offset:0.9 },
+     { transform: 'translateY(300px)' }
+     ], {
+     // timing options
+     duration: 2000,
+//     iterations: 'Infinity',
+      // 是否停留在最后一帧
+     fill:'forwards'
+     },'linear', function () {
+                console.log(1);
+            }
+
+    );
+        // 完成动画后的回调
+        box1Ani.onfinish= function () {
+            box1Ani.pause();
+            console.log('finish');
+     }   ;
+
+        console.log(box1Ani);
+
+    </script>
+</body>
+</html>

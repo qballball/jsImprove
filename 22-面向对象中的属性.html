@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function A() {
+        this.num=20;
+    }
+    A.prototype.num2=10;
+    var a1=new A();
+    // hasOwnproperty(‘属性’)  该属性是否属于该实例
+    console.log(a1.hasOwnProperty('num')); // trrue
+    console.log(a1.hasOwnProperty('num2'));  //false
+    // 是哪个构造函数构建的
+    console.log(a1.constructor);
+
+    var arr=[];
+    console.log(arr.constructor);  // Array
+    console.log(arr.constructor==Array);
+
+
+    function B() {
+
+    }
+    // 自动生成的 每一个函数都会有的，都是自动生成的
+//    B.prototype.constructor=B;
+
+
+    // 但是仍然可以改
+//    B.prototype.constructor=Array;
+
+    var b1=new B();
+    console.log(b1);
+    console.log(b1.hasOwnProperty==Object.prototype.hasOwnProperty);
+
+
+
+    // 虽然 constructor 是自动生成的，但是不经意间会被修改
+
+    function C() {
+
+    }
+
+    // 自动生成的，
+
+    //    C.prototype.constructor=C;
+
+
+
+    // 这种写法不会改变constructor
+//    C.prototype.name='aaa';
+//    C.prototype.age=20;
+
+
+    // 会把前面的constructor属性覆盖掉，因此
+    C.prototype={
+        // 为防止修改，应该从新指定以下
+      constructor:C,
+      name:'aaa',
+      age:20
+    };
+
+
+    var c1=new C();
+    console.log(c1);
+    console.log(c1.constructor);
+
+    // 系统自带的不会被for in到，只有自己写的可以被for in到
+    for(var attr in C.prototype){
+        console.log(attr);
+    }
+
+
+    // instanceof：对象与构造函数在原型上是否有关系
+    function D() {
+
+    }
+
+
+    var d1=new D();
+
+
+    console.log(d1 instanceof D);
+    console.log(d1 instanceof Array);
+    console.log(d1 instanceof Object);  // 所有对象都有Object对象
+
+    // 判断类型
+    var arr2=[];
+    console.log(arr2 instanceof Array);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .login{
+            background-color:#f00;}
+        .title{
+            text-align: center;
+            background-color: #0ff;}
+    </style>
+</head>
+<body>
+<input type="button" value="1"/>
+<input type="button" value="2"/>
+<input type="button" value="3"/>
+
+
+
+
+
+<script>
+    window.onload= function () {
+        var aInput=document.getElementsByTagName('input');
+
+        // 点多次就会出现多次，如何区别？只出现一次？
+        aInput[0].onclick= function () {
+            var d1=new Dialog({title:'center弹窗咯',id:'pop1'});
+        };
+        aInput[1].onclick= function () {
+            var d2=new Dialog({w:100,h:300,dir:3,id:'pop2'});
+        };
+
+
+
+
+
+    };
+    function Dialog(opt) {
+        // 默认参数
+        this.settings={
+            w:300,
+            h:300,
+            title:'示范标题',
+            id:'', // 用来区别弹窗 必填
+            // 1.中间 2.左侧 3.右侧
+            dir:1,
+            content:'示范内容',
+            showTitle:true
+        };
+        extend(this.settings,opt);
+        this.init();
+    }
+
+    Dialog.prototype.init=function () {
+        if(document.getElementById(this.settings.id)){
+            return;
+        }
+        this.create();
+        this.fnClose();
+    };
+    Dialog.prototype.create=function () {
+        this.loginPop=document.createElement('div');
+        this.loginPop.className='login';
+        this.loginPop.id=this.settings.id;
+        this.loginPop.innerHTML=(this.settings.showTitle?`<div class="title"><span>${this.settings.title}</span><span class="close">X</span></div>`:'')+
+        `<div class="content">${this.settings.content}</div>`;
+        document.body.appendChild(this.loginPop);
+        this.setData();
+
+    };
+    Dialog.prototype.setData= function () {
+      this.loginPop.style.position="fixed";
+      this.loginPop.style['z-index']=10;
+      this.loginPop.style.width=this.settings.w+"px";
+      this.loginPop.style.height=this.settings.h+"px";
+      switch(this.settings.dir){
+          case 1:
+              this.loginPop.style.left=(window.innerWidth-this.settings.w)/2+'px';
+              this.loginPop.style.top=(window.innerHeight-this.settings.h)/2+'px';
+          break;
+          case 3:
+              this.loginPop.style.right=0+'px';
+              this.loginPop.style.bottom=0+'px';
+          break;
+      }
+    };
+    // close 关闭
+    Dialog.prototype.fnClose= function () {
+        var self=this;
+      document.querySelector('#'+this.loginPop.id +' .close').onclick= function () {
+          self.loginPop.remove();
+      };
+    };
+
+    function extend(obj1,obj2) {
+        for(var attr in obj2){
+            obj1[attr]=obj2[attr];
+        }
+    }
+
+</script>
+
+
+
+
+</body>
+</html>

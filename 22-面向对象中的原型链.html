@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+
+<script>
+    function Aaa() {
+
+    }
+
+    Aaa.prototype.num=10;
+
+    var a1=new Aaa();
+    console.log(a1);
+    console.log(a1.num);
+
+    // 相当于css style  当实例或者自身有属性的话 就不会找原型上的了
+    function Bbb() {
+        this.num=21;
+    }
+    // 相当于css class
+    Bbb.prototype.num=12222;
+
+    var a2=new Bbb();
+    console.log(a2.num);
+
+
+    function Ddd() {
+
+    }
+
+
+
+    function Ccc() {
+//        this.num=21;
+    }
+    Ccc.prototype.num=666;
+
+    // 原型链的最外层是Object.prototype 当构造函数和原型里都没有该num属性的时候，会用这里面的
+    Object.prototype.num=20000000;
+
+    var a3=new Ccc();
+    console.log(a3.num);
+
+
+    var a4=new Ddd();
+    console.log(a4.num);
+
+
+</script>
+
+</body>
+</html>

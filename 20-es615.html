@@ -3,21 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" href="css/201.css"/>
 </head>
 <body>
-<h1>promise改造运动</h1>
+<h1>script标签</h1>
+
+<!--defer在外链上使用 会在其他的js,dom节点加载完成之后再加载-->
+<!--多个defer按照顺序执行顺序-->
+<!--<script src="./js/1502.js" defer></script>-->
+<!--<script src="./js/1503.js" defer></script>-->
+<!--<script src="./js/1501.js"></script>-->
+
+<!--模块化-->
+<!--带type module的会延迟在其他js之后加载，默认defer,里面的变量是封闭的-->
+<!--<script src="./js/1501.js" type="module"></script>-->
+<!--<script src="./js/1503.js"></script>-->
+<!--<script>
+    console.log(`页面内的！`);
+</script>-->
 
 
-<script src="js/jquery.js"></script>
-
-<script>
 
 
+<script src="./js/1501.js" type="module"></script>
 
 
 
 
-</script>
+
+
 
 </body>
 </html>

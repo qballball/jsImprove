@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+
+<script>
+//在js中  系统对象也是基于原型的程序
+//不要去修改或者添加系统对象下面的方法和属性
+
+  var arr=[1,2,3];
+  // 从写一下push
+  Array.prototype.push= function () {
+      for(var i=0;i<arguments.length;i++){
+          this[this.length]=arguments[i];
+      }
+      return this.length;
+  } ;
+    arr.push(31,4,5)
+    console.log(arr.push(31,4,5));;
+    console.log(arr);
+
+    // 包装对象：基本类型都有自己对应的包装对象
+    //  String Number  Boolean
+   var str=`hello`;
+    console.log(typeof str);
+    // 基本类型会找到对应的包装对象类型，
+    // 然后包装对象把所有的属性和方法给了基本类型，然后包装对象消失,除非整个方法或者属性是共享的否则消失
+    console.log(str.charAt(1));
+    str.indexOf('o');
+
+    var str2=new String('hello');
+    console.log(typeof str2);
+    console.log(str2.charAt(5));
+
+    String.prototype.lastValue= function () {
+        return this.charAt(this.length-1);
+    };
+
+    console.log(str.lastValue());
+
+
+    var str3='hihihis';
+    str3.number=4;
+    // 因为number属性是临时的 包装对象消失了
+    console.log(str3.number);  // undefined
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

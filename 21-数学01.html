@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0; padding: 0;}
+        body{
+            background-color: #61f5a8;}
+        h1{font-weight: bold;}
+        .box{ position: fixed;bottom: 100px; left: 50%;
+            transform: translateX(-50%); width: 460px;}
+        .box img{width: 100px; float: left;
+            margin-right: 20px;}
+        .box img:last-child{    margin-right: 0px;}
+
+    </style>
+</head>
+<body>
+<h1>勾股定理</h1>
+
+
+
+<div class="clear box" id="moveBox">
+
+    <img src="images/32.png" alt=""/>
+    <img src="images/33.png" alt=""/>
+    <img src="images/34.png" alt=""/>
+    <img src="images/35.png" alt=""/>
+
+</div>
+
+
+<script src="js/jquery.js"></script>
+<script>
+// 应用：可以根据两点坐标求距离
+
+// 求m的n次方 pow(m底数，n幂数)
+console.log(Math.pow(2,2));
+console.log(Math.pow(2,3));
+
+
+// 开方
+console.log(Math.sqrt(25));
+// 勾股定理
+console.log(Math.sqrt(Math.pow(3,2)+Math.pow(4,2)));
+
+
+$("#moveBox img").on("mouseover", function (e) {
+
+})
+$(document).on("mousemove", function (e) {
+    $("img").each(function () {
+        var imgCenterLeft=$(this).offset().left+$(this).width()/ 2,
+                imgCenterTop=$(this).offset().top+$(this).height()/ 2,
+                a=imgCenterLeft- e.clientX,
+                b=imgCenterTop- e.clientY,
+                sqrt=Math.sqrt(a*a+b*b),
+                //这个系数根据
+                radio=1-sqrt/350;
+                console.log(sqrt);
+                if(radio<0.5){
+                    radio=0.5
+                }
+                $(this).css({"transform":"scale("+radio+")"});
+    });
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
