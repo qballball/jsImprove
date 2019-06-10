@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="box1">box1</div>
+<div id="span1">span1</div>
+
+
+
+<script>
+
+    // 配置参数opt，方法methods，事件Events
+    // 自定义事件：和函数有关系，让函数能具备事件的某些特性
+       // 作用：有利于多人协作
+    /*function show() {
+        //A do somethings...
+        console.log(1);
+        //B do somethings...
+        console.log(2);
+    }*/
+//    show();
+
+    //自定义事件，是函数（互相不会覆盖）： 和函数有关系，让函数能具备事件的某些特性
+    /*window.addEventListener('show', function () {
+        console.log(1);
+    },false);
+
+    window.addEventListener('show', function () {
+        console.log(2);
+    },false);
+    // 必须主动触发自定义函数
+    show();*/
+
+    var oBox=document.getElementById("box1");
+    var oSpan=document.getElementById("span1");
+
+    bindEvent(oBox,'click', function () {
+       console.log(1);
+    });
+    bindEvent(oBox,'click', function () {
+        console.log(11);
+    });
+    // 自定义事件如何调用？
+    bindEvent(oSpan,'show', function () {
+        console.log(2);
+    });
+
+    bindEvent(oSpan,'show', function () {
+        console.log(22);
+    });
+
+    fireEvent(oSpan,'show');
+
+
+
+
+    function bindEvent(obj,events,fn) {
+        // 通过obj,events 做映射,找到主动触发的事件
+        // fn:一本书，
+        // obj:楼层，
+        // events:书架
+        obj.listeners=obj.listeners||{};
+        obj.listeners[events]=obj.listeners[events]||[];
+        obj.listeners[events].push(fn);
+        if(obj.addEventListener){
+            obj.addEventListener(events,fn,false);
+        }else{
+            obj.attachEvent('on'+events,fn);
+        }
+    }
+    // 主动触发自定义事件
+    function fireEvent(obj,events) {
+        for(var i=0;i<obj.listeners[events].length;i++){
+            obj.listeners[events][i]();
+        }
+
+    }
+
+
+
+
+
+</script>
+
+</body>
+</html>

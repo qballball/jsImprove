@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<span>&#65130;</span>
+<span>\u0021;</span>
+
+<script>
+    console.log('\u0061');
+    console.log('\u4e91');
+    console.log('\u262D');
+    console.log('\u0068');
+    // 连续表示unicode
+    console.log("\u{41}\u{42}\u{43}");
+    console.log("hell\u{43}");
+    var str1='𠮷';
+    console.log(str1.charCodeAt(0));
+    console.log(str1.charCodeAt(1));
+
+    console.log(('hello').repeat(10));
+
+    // es7 补全
+    console.log('x'.padStart(5,'ab')); // ababx
+    console.log('x'.padStart(0,'ab')); // x
+    var str3='                 hahahhahaha          ';
+    console.log(str3);
+    //用于去空格
+    str3t=str3.trimStart().trimEnd();
+    console.log(str3t);
+
+</script>
+</body>
+</html>

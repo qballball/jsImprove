@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+ // 实参：集合，数组，类数组，均是object
+(function () {
+   console.log(typeof arguments) ;
+})();
+// 有名函数 不规范的写法 会undefined
+var f= function g() {
+    return 23;
+}
+console.log(typeof g);
+
+ // delete 只能删掉对象的属性 不能删掉x
+(function (x) {
+    delete x;
+    console.log(x);
+})(1);
+
+ var y= 1,x=y=typeof x;
+ // typeof 返回的是字符串
+ console.log(typeof x);
+ // 'undefined'
+ console.log(x);
+
+
+
+(function (f) {
+    // 1 number
+    console.log(typeof f()) ;
+})(function () {
+    return 1
+});
+
+
+ function test1() {
+     console.log(this);
+ }
+ test1();
+
+ var foo={
+     bar:function () {
+         return this.f
+     },
+     f:1
+ };
+
+ (function () {
+//    console.log(typeof arguments[0]());
+ })(foo.bar);
+
+
+
+// 算法    斐波那契数列 1 1 2 3 5 8 13 21
+
+ // 递归方式
+ function fbnq(n) {
+     if(n<=2){
+         return 1;
+     }
+     return fbnq(n-1)+fbnq(n-2);
+ }
+ console.log(fbnq(8));
+ // 第二种
+ function fbnq2(n) {
+     var arr=[],
+     sum=0;
+     arr[0]=1;arr[1]=1;
+     for(var k=2;k<n;k++){
+         sum=arr[0]+arr[1];
+         arr[0]=arr[1];
+         arr[1]=sum;
+     }
+     return sum;
+ }
+console.log(fbnq2(8));
+console.log(fbnq2(9));
+
+
+ // 数组排序
+ // 冒泡排序
+/* function arrSort(arr) {
+     for(var i=0;i<arr.length;i++){
+         for(var j=0;j<arr.length-i;j++){
+             toCon(j,j+1);
+         }
+     }
+ }
+ function toCon(prev,next) {
+     var temp='';
+
+ }*/
+
+ // 选择排序
+ // 1.从数组当中找到最小的 放在arr[0]
+ // 2.从剩余里面找到最小的  放在arr[1]...
+
+
+ function arrSort2(type,arr) {
+ var newArr=[];
+//     选择排序的思想是：
+// 把每一个数都与第一个数比较，如果小于第一个数，就把它们交换位置；
+// 这样一轮下来，最小的数就排到了最前面；重复n-1轮，就实现了选择排序
+     for(var i=arr.length;i>0;i--){
+         var temp=0;
+         for(var j=1;j<arr.length;j++){
+             if(arr[0]>arr[j]){
+                 temp=arr[0];
+                 arr[0]=arr[j];
+                 arr[j]=temp;
+             }
+         }
+//         console.log(arr);
+         newArr.push(arr[0]);
+         arr.splice(0,1);
+     }
+    if(type=='up'){
+        return newArr;
+    }else if(type=='down'){
+        return newArr.reverse();
+
+    }
+ };
+console.log('new:',arrSort2('up',[12,3,4,51,10,11,1,2]));
+console.log('new:',arrSort2('down',[12,3,4,51,10,11,1,2]));
+
+
+
+ function selectSort(arr){
+     var len=arr.length;
+     var temp;
+     for(var i=0;i<len-1;i++){
+         for(var j=i+1;j<len;j++){
+             if(arr[j]<arr[i]){
+                 temp=arr[j];
+                 arr[j]=arr[i];
+                 arr[i]=temp;
+             }
+         }
+     }
+     return arr;
+ }
+ console.log('new2:',selectSort([12,3,4,51,10,11,1,2]));
+
+
+ //console.log(arrSort([1,2,3,1,233,111,222,6]));  // 升序排序 1,2,3...
+
+
+
+
+</script>
+</body>
+</html>
