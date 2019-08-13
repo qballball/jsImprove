@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        span{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+<div id="txt">
+    目前在web领域，基本上看到那些酷酷的2d动效，都是canvas实现的，flash已经基本上都被淘汰了，canvas效果的实现，无需安装任何插件，
+    IE9及其以上浏览器支持，至少在移动端，大家可以放心大胆使用，甚至webGL3d效果都可以尝鲜。
+</div>
+
+<input type="text" name="" id="findTxt">
+<input type="text" placeholder="请输入替换文本" id="changeTxt">
+<button id="btn">查找并替换</button>
+
+
+
+
+
+<script>
+  document.getElementById('btn').onclick=function () {
+    var txt=document.getElementById('txt'),
+        fV=document.getElementById('findTxt').value,
+        cV=document.getElementById('changeTxt').value;
+      // 如果替换字符不存在 就只执行查找
+      if(!cV){
+          txt.innerHTML=txt.innerHTML.split(fV).join('<span>'+fV+'</span>');
+      }else{
+          txt.innerHTML=txt.innerHTML.split(fV).join('<span>'+cV+'</span>');
+      }
+  }
+
+</script>
+
+</body>
+</html>

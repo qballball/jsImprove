@@ -1,0 +1,54 @@
+<html>
+<head>
+    <meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+    <meta name="ProgId" content="FrontPage.Editor.Document">
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>脚本之家-www.jb51.net 倒记时效果</title>
+</head>
+<body>
+<SCRIPT type="text/javascript">
+    var target=[]
+    function show_date_time_0(){
+        var tBlock=setInterval("show_date_time_0()", 1000);
+        for (var i=0;i<target.length;i++){
+            today=new Date();
+            var t=target[i].endTime.split(',');
+            var feTime=new Date(t[0],t[1]-1,t[2],t[3],t[4],t[5]).getTime();
+            timeold=feTime-today.getTime();
+            sectimeold=timeold/1000;
+            secondsold=Math.floor(sectimeold);
+            msPerDay=24*60*60*1000;
+            e_daysold=timeold/msPerDay;
+            daysold=Math.floor(e_daysold);
+            e_hrsold=(e_daysold-daysold)*24;
+            hrsold=Math.floor(e_hrsold);
+            e_minsold=(e_hrsold-hrsold)*60;
+            minsold=Math.floor((e_hrsold-hrsold)*60);
+            seconds=Math.floor((e_minsold-minsold)*60);
+            if(target.length==0){
+                clearInterval(tBlock);
+                return;
+            }
+            if (daysold<0) {
+                document.getElementById(target[i].el).innerHTML="逾期,倒计时已经失效";
+                target.splice(i,1);
+            }else{
+                document.getElementById(target[i].el).innerHTML=daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+
+            }
+
+        }
+    }
+    show_date_time_0()
+</SCRIPT>
+距还有：
+<div id="TimeCounter_0"></div>
+距奥运会还有(8.8-20:08)：
+<div id="TimeCounter_3"></div>
+
+
+<SCRIPT>
+    target=[{el:'TimeCounter_0',endTime:'2019,6,11,20,8,0'},{el:'TimeCounter_3',endTime:'2019,6,12,16,0,0'}];
+</SCRIPT>
+</body>
+</html>

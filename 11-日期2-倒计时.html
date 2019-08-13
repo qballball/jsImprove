@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/11-date.css">
+    <style>
+        .txt{font-size: 60px; line-height: 135px; width: 90px;
+            float: left;
+            text-align: center;}
+    </style>
+</head>
+<body>
+<div id="blockBox1"></div>
+<div style="width:1000px;" class="box2 clear" id="blockBox2">
+
+</div>
+
+
+<script>
+   var box1=document.getElementById("blockBox1");
+   var block2=document.getElementById("blockBox2");
+  // 未来的时间点（不变）-现在的时间点（在变）
+  // 现在
+  var now1=new Date();
+  // 未来 数字形式(年月日时分秒) | 字符串形式
+  var fe1=new Date(2019,5,12,19,6,0);
+  // 相减为毫秒
+  // console.log(fe1-now1);
+  // 得到秒
+  var s=Math.floor((fe1-now1)/1000);
+  console.log(s);
+  // 转为秒
+  console.log(Math.floor(s%60));
+  // 转为分
+  console.log(Math.floor(s%86400%3600/60));
+  // 转为小时
+  console.log(Math.floor(s%86400/3600));
+  // 转为天数
+  console.log(Math.floor(s/86400));
+
+var cutTime={
+    init:function(){
+      this.cutInit1();
+      this.cutInit2();
+    },
+    cut: function (fetureTime) {
+        // var reg=/(\d{4})-(\d{2})-(\d{2}\s(\d{2}):(\d{2}):(\d{2}))/g;
+        // reg.test(fetureTime);
+        // RegExp.$1,$2... 也可以实现
+        var times=fetureTime.split(' '),
+            dates=times[0].split('-'),
+            time=times[1].split(":"),
+             nowTime = new Date(),
+             feTime = new Date(dates[0], dates[1]-1, dates[2], time[0], time[1], time[2]),
+             totalS = Math.floor((feTime - nowTime) / 1000),
+            d = Math.floor(totalS / 86400),
+            h = this.singleNumDeal(Math.floor(totalS % 86400 / 3600)),
+            m = this.singleNumDeal(Math.floor(totalS % 86400 % 3600 / 60)),
+            s = this.singleNumDeal(Math.floor(totalS % 60));
+
+        return {d: d, h: h, m: m, s: s};
+
+    },
+    cutInit2:function () {
+        var that=this;
+        that.cutBlock2();
+        setInterval(function () {
+            that.cutBlock2();
+        },1000);
+    },
+    cutInit1:function () {
+        var that=this;
+        that.cutBlock1();
+        setInterval(function () {
+            that.cutBlock1();
+        },1000);
+    },
+
+    cutBlock1:function(){
+        var that=this;
+        var obj=that.cut('2019-06-15 10:00:00');
+        box1.innerHTML=`还剩下${obj.d}天${obj.h}时${obj.m}分${obj.s}秒`;
+    },
+    cutBlock2:function(){
+        var that=this,
+            obj=that.cut('2019-06-15 10:00:00');
+            var timeStr=obj.d+'天'+obj.h+":"+obj.m+":"+obj.s,timeStrArr=timeStr.split(''),pointStr='<div class="img-wrapper"><img src="images/digit/point.png"></div>',
+            showStr='';
+        for(var i=0;i<timeStrArr.length;i++){
+            if( i==4){
+                showStr+='<span class="txt">时</span>';
+            } else if( i==7){
+                showStr+='<span class="txt">分</span>';
+            } else if(timeStrArr[i]=='天'){
+                showStr+='<span class="txt">天</span>';
+            }else{
+                timeStrArr[i]='0'+(timeStrArr[i]-0+1);
+                showStr+=`<div class="img-wrapper"><img src="images/digit/digit_${timeStrArr[i]}.png"></div>`;
+            }
+        }
+        block2.innerHTML=showStr;
+    },
+
+
+    /**
+     * 单个数值处理
+     * @param num
+     */
+    singleNumDeal:function (num) {
+        var n=num>=10?num:'0'+num;
+        return n;
+    }
+};
+cutTime.init();
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+#blockBox1{
+    text-align: center;
+    line-height: 100px;font-size: 40px;}
+
+.box2{
+    width: 800px; margin: 10px auto;height: 135px; overflow: hidden;
+}
+.box2 .img-wrapper{
+    width: 90px;
+    margin-right: 5px;
+    float: left;
+}
+
+.cur-ani{ animation: ani 1s;}
+.next-ani{animation:bounceInUp 1s ease-out;}
+
+@keyframes bounceInUp {
+    0%, 60%, 75%, 90%, 100% {
+        animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    }
+
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 3000px, 0);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translate3d(0, -20px, 0);
+    }
+
+    75% {
+        transform: translate3d(0, 10px, 0);
+    }
+
+    90% {
+        transform: translate3d(0, -5px, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0); opacity: 1;
+    }
+}
+@keyframes ani {
+    from{
+        margin-top:0px;
+    }
+    to{
+        margin-top:-135px;
+    }
+}
+
+/*日历*/
+.calender-wrapper{width: 80%;
+    margin: 20px auto;}
+.choose-box .drop-unit{ line-height: 30px; width: 20%; float: left;
+    margin-right: 5%; height: 30px;}
+
+.calender-wrapper .date-input{float: left;
+    line-height: 26px;padding: 0px 5px; margin-right: 10px}
+.calender-wrapper .return-btn{
+    float: left;
+    text-align: center;
+    line-height: 30px;
+    padding: 0px 10px;
+    background-color: #0E9CFF;
+    color: #fff;
+    cursor: pointer;
+}
+.canlender-box li{
+    border-bottom: 1px solid #333;
+    font-size: 14px;
+    float: left;
+    width: 14%;  line-height: 50px;
+    text-align: center;
+    box-sizing: border-box;
+    border-right: 1px solid #333;
+    cursor: pointer;
+}
+.canlender-box{
+    border-left:1px solid #333;
+    margin: 20px 0px;
+    width: 90%;
+}
+
+.canlender-box li.noexit{
+    background-color: #ddd;
+}
+
+
+.canlender-box li.today{
+    background-color: #0ff;
+}
+.canlender-box li.current{
+    background-color: #f00;
+}
+
+.canlender-box li:nth-child(7n){
+    border-right:1px solid #333;
+}
+/*选择前七个*/
+.canlender-box li:nth-child(-n+7){
+    border-top:1px solid #333;
+}

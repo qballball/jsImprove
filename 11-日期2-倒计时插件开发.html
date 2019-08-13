@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/11-date.css">
+    <style>
+        .txt {
+            font-size: 60px;
+            line-height: 135px;
+            width: 90px;
+            float: left;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="blockBox1"></div>
+
+<script>
+    function CutTime(obj) {
+        var that = this;
+        this.cutElm = document.getElementById(obj.el),
+        this.endTime = obj.endTime;
+        this.endTxt = obj.endTxt || '时间到！';
+        if (!that.cutElm) {
+            throw new Error('未指定倒计时元素');
+            return;
+        }
+        if (!that.endTime) {
+            throw new Error('未指结束时间');
+            return;
+        }
+        that.blockInit(obj.endFn);
+    }
+    CutTime.prototype.blockInit=function(fn){
+        var that=this;
+        if(!that.calcTime(fn)){
+            return;
+        }
+        that.cutElm.blockAni = setInterval(function () {
+            that.calcTime(fn);
+        }, 1000);
+    }
+    /**
+     * 时间计算
+     */
+    CutTime.prototype.calcTime = function (fn) {
+        var that = this,
+            times = this.endTime.split(' '),
+            dates = times[0].split('-'),
+            time = times[1]?times[1].split(":"):[],
+            nowTime = new Date(),
+            feTime = new Date(dates[0], dates[1] - 1, dates[2], time[0]||'00', time[1]||'00', time[2]||'00'),
+            totalS = Math.floor((feTime - nowTime) / 1000),
+
+            d = Math.floor(totalS / 86400),
+            h = that.singleNumDeal(Math.floor(totalS % 86400 / 3600)),
+            m = that.singleNumDeal(Math.floor(totalS % 86400 % 3600 / 60)),
+            s = that.singleNumDeal(Math.floor(totalS % 60));
+        if (totalS <=0) {
+            clearInterval(that.cutElm.blockAni);
+            if(fn){
+                that.cutElm.innerHTML = `还剩下:00天00时00分00秒`;
+                fn(that.endTxt);
+            }else{
+                that.cutElm.innerHTML =that.endTxt;
+            }
+            return false;
+        }
+        that.cutElm.innerHTML = `还剩下:${d}天${h}时${m}分${s}秒`;
+        return true;
+
+
+    };
+    /**
+     * 单个月日 时分秒数值补齐两位处理
+     * @param num
+     */
+    CutTime.prototype.singleNumDeal = function (num) {
+        var n = num >= 10 ? num : '0' + num;
+        return n;
+    }
+
+    var box1 = new CutTime(
+        {el: 'blockBox1', 
+            endTime: '2019-06-12 16:42',
+            endTxt: '哈哈哈，活动结束了哦！',
+            endFn:function (txt) {
+                console.log(txt);
+           }
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ // 比较的是字符unicode编码
+console.log('云璐'>'球球');
+// 默认比较第0个
+console.log('云'.charCodeAt());
+console.log('球'.charCodeAt());
+
+// 截取
+ var str1='最新的ECMAScript都已经到发布到 2018 版了。\n' +
+     '我们应该有的态度是： Stay hungry ! Stay young ！' +
+     '从接触 vue 到工作中用到 vue 将近 2 年了，在开发 vue 项目中用到了很多 es6 的 api ，es6 给我的开发带来了很大便利。\n' +
+     '本文只总结小汪在工作和面试中经常遇到的 ES6 及之后的新 api 。\n' +
+     '有空就得多总结，一边总结，一边重温学习！！！';
+ // 从索引3的位置开始至最后
+console.log(str1.substring(3));
+console.log('3,13----'+str1.substring(3,13));
+// 如果第一个是负数，则会变为0，不支持负数
+console.log(str1.substring(-3,3));
+// 如果第二个是负数，则第二个变为0，和第一个值做交换:检测，大值往后，小值放前。
+console.log(str1.substring(3,-3));    
+
+//slice 不支持第二个值比第一个值小
+console.log(str1.slice(3,0));
+console.log(str1.slice(0,3));
+
+// 从后往前
+console.log(str1.slice(-4,-2));
+
+// 转大小写 只针对英文
+var str2='小球球QQQQQdjfdjfhddj45Hellosafdsf';
+console.log(str2.toLowerCase());
+console.log(str2.toUpperCase());
+
+// 把文本以特定字符或者全部拆分  为数组形式
+var str3= '本文只总结小汪在工作和面试中经常遇到的 ES6 及之后的新 api 。有空就得多总结，一边总结，一边重温学习！！！';
+console.log(str3.split('在工作'));
+// 全部拆分
+console.log(str3.split(''));
+
+// 需要注意的细节
+var str4='/www.baidu/.com/';
+// 如果字符串开头结尾的值一样，那么 会被作为数组前后都会有空串
+console.log(str4.split('/'));
+// split 也可以指定分隔的段数
+ var str5='2014-12-23-20-34';
+ // 只截取了日期
+ console.log(str5.split('-',3));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

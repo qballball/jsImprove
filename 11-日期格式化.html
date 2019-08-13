@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    Date.prototype.format=function (type) {
+    // 处理 月日 时 分 秒 毫秒
+    var obj={
+      'M+':this.getMonth()+1,
+      'D+':this.getDate(),
+      'h+':this.getHours(),
+      'm+':this.getMinutes(),
+      's+':this.getSeconds(),
+      'S':this.getMilliseconds()
+    };
+    var weeks=['日','一','二','三','四','五','六','七'];
+    // 处理年
+        var yearReg=/(Y+)/g;
+        if(yearReg.test(type)) {
+            type = type.replace(RegExp.$1, (this.getFullYear()+'').substr(4-RegExp.$1.length));
+        }
+    // 处理周
+        var weekReg=/(E+)/g;
+        if(weekReg.test(type)){
+            type=type.replace(RegExp.$1,'星期'+weeks[this.getDay()]);
+        }
+    for(var k in obj){
+        var reg=new RegExp('('+k+')','g');
+        if(reg.test(type)){
+            // 如果指定格式是1位，原值输出；如果是两位的 则前面加0处理
+            type=type.replace(RegExp.$1,RegExp.$1.length==1?obj[k]:('0'+obj[k]).slice((''+obj[k]).length-1));
+        }
+    }
+    return type;
+    };
+    console.log(new Date('2018-12-5 12:00:00').format('YYYY-MM-DD EE hh:mm:ss'));
+    console.log(new Date('2018-12-5 12:30:00').format('YYYY-MM-DD EE hh:mm'));
+    console.log(new Date('2018-12-5 12:3:00:23').format('YY-MM-D EE h:m:s:S'));
+
+
+</script>
+</body>
+</html>

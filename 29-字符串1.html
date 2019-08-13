@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<input type="text" id="numInput" placeholder="请输入数字">
+
+<script>
+    var str1 = '云璐yunlu  ';
+    console.log(str1.length); // 9
+    // 字符串 索引位置的对应值
+    console.log(str1.charAt());
+    console.log(str1.charAt(2));
+    // 如果超过字符长度或者小于0 则返回空
+    console.log(str1.charAt(19));
+    console.log(str1.charAt(-2));
+
+    var acsii = str1.charCodeAt(1);
+    console.log(acsii);
+    console.log(String.fromCharCode(acsii));
+    console.log(String.fromCharCode(str1.charCodeAt(0), acsii));
+
+
+    var str2 = '0123456789azAZ ';
+    console.log(str2.charCodeAt(0));
+    console.log(str2.charCodeAt(1));
+    console.log(str2.charCodeAt(9));
+    console.log(str2.charCodeAt(10));
+    console.log(str2.charCodeAt(11));
+    // 0-9 48-57  a-z:97-122 A-Z:25-90
+    console.log(str2.charCodeAt(12));
+    console.log(str2.charCodeAt(13));
+    // 空格 32
+    console.log(str2.charCodeAt(14));
+
+    const ifNum = (v) => {
+        let status = true, noIndex = 0;
+        for (var k = 0; k < v.length; k++) {
+            if (v.charCodeAt(k) < 48 || v.charCodeAt(k) > 57) {
+                status = false;
+                noIndex = k;
+                break;
+            } else {
+                status = true;
+            }
+        }
+        return {status: status, num: noIndex};
+
+    };
+
+
+    var input1 = document.getElementById('numInput');
+    input1.onkeyup = function (e) {
+        if (e.keyCode == 13) {
+            if (!ifNum(this.value).status) {
+                console.log(`第${ifNum(this.value).num + 1}位不是数字`);
+                return;
+            }
+            console.log('数字！');
+        }
+    };
+
+    // 看下1-10000之间都有哪些charcode
+    let str3 = '';
+    /* for(var i=0;i<10000;i++){
+         str3+=String.fromCharCode(i);
+     }
+     console.log(str3);*/
+
+
+    var qqSecret = {
+        dCode: new Date().getDate(),
+        /**
+         * 加密
+         * @param str
+         * @returns {string}
+         */
+        add: function (str) {
+            let strCodeArr = [], strCodeStr = '';
+            for (let k = 0; k < str.length; k++) {
+                strCodeArr.push(String.fromCharCode((str.charCodeAt(k)) + this.dCode));
+            }
+            // 每个加密字用qq*连接作为分隔
+            strCodeStr = strCodeArr.join("*qq*");
+            return strCodeStr;
+        },
+        /**
+         * 解密
+         * @param str
+         * @returns {string|string}
+         */
+        remove: function (str) {
+            var openSecretStr = '', openSecretArr = str.split('*qq*');
+            for (let k = 0; k < openSecretArr.length; k++) {
+                openSecretStr += String.fromCharCode((openSecretArr[k].charCodeAt(0) - this.dCode));
+            }
+            return openSecretStr;
+        }
+
+    };
+
+    var str5 = 'hello hi!承认你忘不掉我的色彩！';
+    console.log(qqSecret.add(str5));
+    console.log(qqSecret.remove(qqSecret.add(str5)));
+
+    // 加密
+    let str4 = '你好哈哈哈123', str4CodeArr = [], str4CodeStr = '', sCode = new Date().getDate();
+    for (let k = 0; k < str4.length; k++) {
+        // 这是对应位置正常的charcode
+        // str4CodeArr.push((str4.charCodeAt(k)));
+        // 把正常的chacode加今天的日期数然后用fromCharCode 返回。
+        str4CodeArr.push(String.fromCharCode((str4.charCodeAt(k)) + sCode));
+    }
+    // 每个加密字用qq*连接作为分隔
+    str4CodeStr = str4CodeArr.join("*qq*");
+    console.log(str4CodeStr);
+
+    // 解密
+    var openSecret = '', openSecretArr = str4CodeStr.split('*qq*');
+    for (let k = 0; k < openSecretArr.length; k++) {
+        openSecret += String.fromCharCode((openSecretArr[k].charCodeAt(0) - sCode));
+    }
+    console.log(openSecret);
+
+
+</script>
+
+</body>
+</html>

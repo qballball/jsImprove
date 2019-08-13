@@ -6,10 +6,10 @@
 </head>
 <style>
     li{width:64px; height: 64px; background-position: 0 0;background-repeat: no-repeat; background-image: url(images/4.png;)}
+
 </style>
 
 <body>
-
 <ul id="oUl">
     <li>1</li>
     <li>2</li>
@@ -17,23 +17,8 @@
 </ul>
 
 <script>
-var oUl=document.getElementById("oUl");
-var oLi=oUl.getElementsByTagName("li"),
-    // 默认
-    clickIndex=0;
-
-
-  /*  for(var k=0;k<oLi.length;k++){
-        oLi[k].index=k;
-        oLi[k].onclick = function () {
-            oLi[clickIndex].style.backgroundImage='';
-            this.style.backgroundImage='url(images/'+(this.index+1)+'.png)';
-            clickIndex=this.index;
-
-        };
-    }*/
-
-
+var oUl=document.getElementById("oUl"),
+    oLi=oUl.getElementsByTagName("li");
 for(var k=0;k<oLi.length;k++){
     oLi[k].onOff=true;
     oLi[k].onclick = function () {

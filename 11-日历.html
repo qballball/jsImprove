@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>日历选择</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/11-date.css">
+
+</head>
+<body>
+<!--        option[value=201$]{201$}*9-->
+
+<div class="calender-wrapper">
+    <div class="clear choose-box">
+        <select class="drop-unit" name="" id="yearUnit">
+        </select>
+        <select class="drop-unit" name="" id="monthUnit">
+
+        </select>
+        <input class="date-input" type="text" readonly value="">
+        <span class="return-btn">回到当前</span>
+    </div>
+    <div>
+        <ul class="canlender-box clear">
+            <li>星期1</li>
+            <li>星期2</li>
+            <li>星期3</li>
+            <li>星期4</li>
+            <li>星期5</li>
+            <li>星期6</li>
+            <li>星期7</li>
+        </ul>
+        <ul id="calender" class="canlender-box clear">
+
+
+        </ul>
+
+    </div>
+
+</div>
+
+<script>
+    var calender = {
+        /**
+         * 初始化
+         */
+        init: function (timeInterval) {
+            var that = this;
+            that.elmInit(timeInterval);
+
+            that.currentMonthShow();
+            that.bindEvent();
+
+        },
+        elmInit:function(timer){
+            var that=this;
+            that.yElem = document.getElementById('yearUnit');
+            that.mElem = document.getElementById('monthUnit');
+            that.calElem = document.getElementById('calender');
+            that.inputElem = document.querySelector('.calender-wrapper .date-input');
+            that.returnTodayBtn = document.querySelector('.calender-wrapper .return-btn');
+            that.yearUnit(timer);
+            that.monthUnit();
+        },
+        /**
+         * 年份组件自定义
+         */
+        yearUnit:function(timer){
+           var that=this,
+               yearOptStr='',years='';
+           // 如果有时间间隔就显示年份区间的
+           if(timer && timer.yearInterval){
+               years=timer.yearInterval.split('-');
+               for(var i=years[0];i<=years[1];i++){
+                    yearOptStr+=`<option value="${i}">${i}年</option>`;
+               }
+               that.startYear=years[0];
+               that.endYear=years[1];
+           //  如果没有年份区间 就选择当前年份之后五年的日期
+           }else{
+               years=new Date().getFullYear();
+               for(var i=years;i<=years+5;i++){
+                   yearOptStr+=`<option value="${i}">${i}年</option>`;
+               }
+               that.startYear=years;
+               that.endYear=years+5;
+           }
+            that.yElem.innerHTML=yearOptStr;
+
+        },
+        /**
+         * 选择月份组件
+         */
+        monthUnit:function(){
+            var that=this,
+                monthStr='';
+          for(var i=0;i<12;i++){
+              monthStr+=`<option value="${i}">${i+1}月</option>`;
+          }
+            that.mElem.innerHTML=monthStr;
+
+        },
+        // 现在的日期
+        nowDate: {},
+        // 选择的日期
+        chooseDate:{},
+        /**
+         * 现在当月的展示
+         */
+        currentMonthShow: function () {
+            var that = this,
+                y = new Date().getFullYear(),
+                m = new Date().getMonth(),
+                d = new Date().getDate();
+               that.nowDate = that.dealDate(y, m, d);
+               that.changeShow(y,m,d);
+        },
+        /**
+         * 日期处理
+         * @param year
+         * @param month
+         * @param day
+         * @returns {{d: string, month: *, y: *, m: string}}
+         */
+        dealDate: function (year, month, day) {
+            var that = this, obj = {},
+                month = parseInt(month),
+                m = month >= 10 ? month : '0' + month,
+                d = day >= 10 ? day : '0' + day,
+                trueMonth = month + 1 >= 10 ? month + 1 : '0' + (month + 1);
+            obj = {y: year, m: m, d: d, month: trueMonth};
+            return obj;
+        },
+        /**
+         * 顶部和日历都变化
+         */
+        changeShow: function (y,m,d,isCurMonth) {
+            var that = this,
+                dates = that.dealDate(y,m,d);
+            that.chooseDate=dates;
+            that.topChooseShow(dates);
+            // 这个当在当月选择的时候不需要更新日历显示
+            if(!isCurMonth){
+                that.calenderUpdate=true;
+                that.currentArr=[];
+                that.calenderShow(dates);
+            }else{
+                that.calenderUpdate=false;
+            }
+        },
+        /**
+         * 顶部年月选择、日期时间展示
+         * @param date
+         */
+        topChooseShow: function (date) {
+            var that = this;
+            that.yElem.value = date.y;
+            that.mElem.value = parseInt(date.m);
+            that.inputElem.value = `${date.y}-${date.month}-${date.d}`;
+        },
+        calenderUpdate:false,
+        /**
+         * 日历展示
+         * @param date
+         */
+        calenderShow: function (date) {
+            var that = this,
+                yearVal = parseInt(date.y),
+                monthVal = parseInt(date.m),
+                trueMonth = parseInt(date.month),
+                curMonthNum = new Date(yearVal, trueMonth, 0).getDate(),
+                beforeMonthNum = new Date(yearVal, trueMonth - 1, 0).getDate(),
+                weekDay = new Date(yearVal, monthVal, 1).getDay(),
+                str = '';
+            // 处理前一个月的结束
+            if (weekDay > 1) {
+                for (var i = beforeMonthNum - weekDay + 2; i <= beforeMonthNum; i++) {
+                    str += `<li class="noexit before-month">${i}</li>`;
+                }
+            } else if (weekDay <= 1) {
+                for (var i = beforeMonthNum - (6 + weekDay - 1); i <= beforeMonthNum; i++) {
+                    str += `<li class="noexit before-month">${i}</li>`;
+                }
+            }
+            // 当月日历
+            for (var k = 1; k <= curMonthNum; k++) {
+                // 如果是当月的 当天着重展示
+                if (yearVal == that.nowDate.y && monthVal == that.nowDate.m && that.nowDate.d == k) {
+                    str += `<li class="today">${k}</li>`;
+                // 指定的天数 着重展示
+                } else if (date.d == k) {
+                    str += `<li class="current">${k}</li>`;
+                } else {
+                    str += `<li>${k}</li>`;
+                }
+            }
+            that.calElem.innerHTML = str;
+            var liLen = document.querySelectorAll('#calender li').length;
+            // 循环未来一个月的开始
+            for (var n = 1; n <= 42 - liLen; n++) {
+                str += `<li class="noexit next-month">${n}</li>`;
+            }
+            that.calElem.innerHTML = str;
+
+
+        },
+        /**
+         * 事件绑定
+         */
+        bindEvent: function () {
+            var that = this;
+            // 年份变更，回到选择年份第一月
+            that.yElem.onchange = function (e) {
+                that.changeShow(this.value, 0, 1);
+            }
+            // 月份变更 显示选择的月份
+            that.mElem.onchange = function (e) {
+                that.changeShow(that.yElem.value, this.value, 1);
+            }
+            // 回到当前
+            that.returnTodayBtn.onclick = function () {
+                that.currentMonthShow();
+            }
+
+            // 日历点击
+            that.calElem.addEventListener('click',function(e){
+                if(e.target.tagName.toLowerCase()=='li'){
+                    var lis=this.querySelectorAll('li');
+                    for(var m in lis){
+                        lis[m].index=m;
+                    }
+                     var index=e.target.index,
+                         day=e.target.innerHTML;
+                    if (e.target.className.indexOf('before-month') > 0) {
+                        if(that.chooseDate.y==that.startYear && that.chooseDate.m == 0){
+                            console.log('不在范围内不能再选');
+                            return;
+                        }
+                        if (that.chooseDate.m == 0) {
+                            that.changeShow(that.chooseDate.y - 1, 11,day);
+                        } else {
+                            that.changeShow(that.chooseDate.y,that.chooseDate.m - 1,day);
+                        }
+                    }else if (e.target.className.indexOf('next-month') > 0) {
+                        if(that.chooseDate.y==that.endYear && that.chooseDate.m == 11){
+                            console.log('超出范围内不能再选');
+                            return;
+                        }
+                        if (that.chooseDate.m == 11) {
+                            that.changeShow(parseInt(that.chooseDate.y) + 1, 0,day);
+                        } else {
+                            that.changeShow(that.chooseDate.y, parseInt(that.chooseDate.m) + 1,day);
+                        }
+                    }else {
+                        if (that.currentArr.length>=2) {
+                            lis[that.currentArr[0]].classList.remove("current");
+                            that.currentArr.splice(0,1);
+                        }
+
+
+                        for (var mm = 0; mm < lis.length; mm++) {
+                            if (lis[mm].index == index) {
+                                lis[mm].classList.add('current');
+                                that.currentArr.push(mm);
+                            }
+                        }
+                        if(that.currentArr.length==2 && that.currentArr[0]!=that.currentArr[1]){
+                            var maxNum=Math.max(that.currentArr[0],that.currentArr[1]),
+                                minNum=Math.min(that.currentArr[0],that.currentArr[1]);
+                            for (let a = 0; a < lis.length; a++) {
+                                    if(a>=minNum && a<=maxNum){
+                                        lis[a].classList.add('current');
+                                    }else{
+                                        lis[a].classList.remove('current');
+                                    }
+                            }
+
+
+                        }
+
+                        that.changeShow(that.chooseDate.y, that.chooseDate.m, day,true);
+                    }
+
+                }
+                
+            });
+
+        },
+        currentNum:0,
+        currentArr:[]
+
+    };
+    // 可配置年份间隔
+    calender.init({yearInterval:'2019-2021'});
+    // calender.init();
+
+
+</script>
+</body>
+</html>

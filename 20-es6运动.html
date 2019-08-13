@@ -38,25 +38,7 @@
       width:50,
       height:50
     };
-   /* function move(obj,attr,start,end) {
-        //b:初始步数(这个要不断变化）
-        //t:初始值
-        //c:目标值
-        //d:总步数
 
-       var styles=getStyle(obj,attr),
-           step=0;
-       var k=setInterval(function () {
-           var dis1=Tween.Linear(step,styles,end,20);
-           if(step>=20){
-               clearInterval(k);
-               dis1=end;
-           }else{
-               step++;
-           }
-           obj.style.left=dis1+'px';
-       },24);
-    };*/
 
     function move(obj,attr,start,end) {
         //b:初始步数(这个要不断变化）
@@ -120,7 +102,25 @@
     .then( ()=>movePromise( box,"top",200,1000 ) )
     .then( ()=>console.log( "done" ) )*/
 
+    /* function move(obj,attr,start,end) {
+         //b:初始步数(这个要不断变化）
+         //t:初始值
+         //c:目标值
+         //d:总步数
 
+        var styles=getStyle(obj,attr),
+            step=0;
+        var k=setInterval(function () {
+            var dis1=Tween.Linear(step,styles,end,20);
+            if(step>=20){
+                clearInterval(k);
+                dis1=end;
+            }else{
+                step++;
+            }
+            obj.style.left=dis1+'px';
+        },24);
+     };*/
 
 
 

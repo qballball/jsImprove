@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .box{width: 600px;  margin: 40px auto;}
+        #txtBox{
+            border: 1px solid #ddd; padding: 10px;
+            margin-bottom: 10px;
+            height: 400px; overflow-y:auto;
+        }
+        .txt{
+            width: 30px;
+            line-height: 30px;
+            text-align: center;
+            float: left;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        #ipt{
+            width: 100%;
+            line-height: 30px;}
+    </style>
+</head>
+<body>
+<div class="box">
+
+<div id="txtBox" class="clear">
+
+</div>
+<input type="text" id="ipt" placeholder="请输入内容">
+
+</div>
+
+
+<script>
+    var ipt=document.querySelector('#ipt');
+    var txtBox=document.querySelector('#txtBox');
+    function splitTxt(txt){
+        var str='',txtArr=txt.split('');
+        for(var i=0;i<txtArr.length;i++){
+               str+=`<div class="txt" style="background: #${changeColor()}">${txtArr[i]}</div>`;
+        }
+        txtBox.innerHTML=str;
+    }
+
+    function changeColor(){
+        var rgb='',arr=[0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'];
+        for(var i=0;i<6;i++){
+            rgb+=''+arr[Math.floor(Math.random()*16)]
+        }
+        return rgb;
+    };
+
+    ipt.onkeyup=function(e){
+        if(e.keyCode==13){
+            splitTxt(this.value);
+            this.value='';
+        }
+    };
+</script>
+
+</body>
+</html>

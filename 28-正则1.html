@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var t1='124324a_22432dfsdf',n1=1;
+    // var r1=new RegExp('/'+t1+'/g');  // 这种写法不能加变量
+    var r1=new RegExp('(\\d{'+n1+',})(\\w)','g');
+    console.log(r1.test(t1));
+    console.log(RegExp.$1);
+    // 两者结果一样 一个正则调用 一个是字符串调用
+    console.log(r1[Symbol.match](t1));
+    console.log(t1.match(r1));
+
+    // 字符串对象共有 4 个方法，可以使用正则表达式：
+    // match()、replace()、search()和split()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * 检验字符表达式必须有n个数字
+     * @param str
+     * @param many 默认10位
+     * @returns {boolean}
+     */
+    const digitReg=(str,many=10)=>{
+        var reg = new RegExp("^\\d{"+many+"}$","gim");
+        if(reg.test(str)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    console.log(digitReg('999',3));
+    console.log(digitReg('1038301987'));
+
+</script>
+</body>
+</html>

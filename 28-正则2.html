@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="txtBox">
+
+</div>
+
+
+<script>
+    var str='<div class="RichContent-inner">' +
+        '<span class="RichText ztext CopyrightRichText-richText" itemProp="text">自己总结的一些东西：' +
+        '<br/><br/>不要将思想放在别人身上，老去关注别人，你会很累。将眼睛盯着自己的内心，只关注自己的点滴进步，无论别人如何变化我自岿然不动。' +
+        '<br/><br/>不要老觉得有许多人会关注你，其实并没有。你只需要表现好你自己想表现的，无视他人，其实他们大多也是无视你的。<br/><br/>当你感觉再不济，你在某些人眼中也是羡慕的骄傲。当你感觉好累生活没意义的时候，想想你在远方的亲戚朋友，你在他们眼中应该是怎样的。<br/><br/><br/>不要去揣测他人。自以为会看懂别人，其实你根本不能判断自己哪一次看懂了哪一次看错了，所以与其胡乱猜测，不如多思考思考自己，只要不影响到自己，管别人做什么。<br/><br/>许多时候你感觉活不成自己想要的样子，其实就是你的周围接触的圈子太狭窄太落后了，导致你眼光局限，思想局限。多和思想开放的人交朋友，多参加活动，出去走走看看。<br/><br/>永远要虚心不断地去学习。有时候你觉得自己在自己的思想里已经很牛逼了，其实是你的思维已经僵化呆滞了，别人告诉你一种新技能新方式，你才会恍然大悟原来自己连这个都不知道。<br/><br/>不要去抱怨已经过去的事，也不要去担心还没发生的事，思考做好当下手里的事。许多时候人会焦虑就是太顾前或者太顾后。<br/><br/>当你对自己外貌不自信的时候，去翻翻自己以前的黑照。你会庆幸自己没有按照以前的样子发展下去，感谢自己现在的样子。<br/><br/>有时候一个自信的眼神比你的外貌更重要。没有自信，畏畏缩缩，没有人愿意接近你。<br/><br/>世界上不可能有两个完全相同的人。根本没有一个人会完全知道你在想什么。<br/><br/>许多时候你觉得别人很邪恶，其实是你把自己无限压抑的那个“自己”投射到了别人身上。你总觉得别人做什么都很像那个邪恶的你，其实邪恶的不是别人，是你的内心。<br/><br/>许多事情根本没有人逼你一定要这样那样做，想想是不是许多压力是自己的虚荣心在作祟或者自己想要的太多了呢。你的父母最根本的希望就是你不要死，好好活着。<br/><br/>允许自己负面情绪的存在，不要去抱怨和抗拒，静下来，深呼吸，去感受,去调整。<br/><br/>时刻提醒自己是一个成年人了。遇到有些事情了思维会自动将自己带入以前的“孩童”思维，你还没有察觉，所以你会痛苦，想想一个成年人应该怎么处理。<br/><br/>成长就是不断遇到问题并解决问题的过程。每个人都会遇到各种各样的问题，你有时候看到的只是别人一帆风顺的一面，所以不要抱怨自己时运不佳。' +
+        '</span></div>';
+    var reg=/((<.*?>){1,})/g;
+    var rStr=str.replace(reg,'</br>');
+    console.log(rStr);
+    document.querySelector("#txtBox").innerHTML=rStr;
+
+    var str2='http://1.com https://333.com https://2.com';
+    var reg2=/(.+?)\/\/(.+?\.com)\s?/g;
+    var reg22=/(.+?)\/\/.+?\.com\s?/g;
+    var m2=str2.replace(reg2,'$1 // $2 哈哈哈');
+    var m3=str2.replace(reg22,'$1嘻嘻');
+    console.log(1);
+
+    var date1='20190711074000';
+    var pattern = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/;
+    date1= date1.replace(pattern, '$1-$2-$3 $4:$5:$6');
+    console.log(date1);
+
+    var str3='(123)(456)';
+    str3=str3.replace(/(\))/g,'$1,');
+    console.log(str3);
+     
+    var numReg=/\d/g,arr1=[1,100,2,3,'rt',4,'qw',800];
+    for(var i=0;i<arr1.length;i++){
+       // console.log(numReg.lastIndex);
+       //  numReg.lastIndex=0;
+        if(numReg.test(arr1[i])){
+            console.log(arr1[i]);
+        }
+    }
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>
